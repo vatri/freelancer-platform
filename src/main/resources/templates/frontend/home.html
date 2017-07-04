@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:include="frontend/partials/head(title='Homepage title')">
-    <title>Test...</title>
 </head>
 <!--<div th:include="frontend/partials/head"></div>-->
 <body>
 
-    <h1>Welcome to freelancer</h1>
-    <h3>Get or post a job</h3>
+    <div th:include="frontend/partials/menu"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Welcome to talent marketplace</h1>
+                <p>
+                    Are you freelancer? <a th:href="@{/job}" href="#">Find jobs</a>
+                </p>
+
+                <p>
+                    Are you business owner? <a href="#">Post a job</a> or <a href="#">find talents</a>
+                </p>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

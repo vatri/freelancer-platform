@@ -1,6 +1,6 @@
-spring.datasource.url= jdbc:mysql://localhost:3306/{DB}
-spring.datasource.username=root
-spring.datasource.password=
+spring.datasource.url= jdbc:mysql://localhost:3306/[DB]
+spring.datasource.username=[USER]
+spring.datasource.password=[PWD]
 
 # none by default spring.jpa.hibernate.ddl-auto=update
 spring.jpa.properties.hibernate.show_sql=false
@@ -12,3 +12,8 @@ spring.http.multipart.max-file-size=1500KB
 spring.http.multipart.max-request-size=1500KB
 
 spring.thymeleaf.cache=false
+
+# Freelancer can see others' quotes
+freelancer.see-other-quotes = false
+freelancer.freelancer-can-see-freelancers = true
+freelancer.client-can-see-jobs = true

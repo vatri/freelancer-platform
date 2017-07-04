@@ -1,0 +1,39 @@
+<h1>Create job</h1>
+
+<form method="POST" th:action="@{/job/save}">
+    <fieldset>
+        <label>Title</label>
+        <input type="text" name="title" />
+    </fieldset>
+
+    <fieldset>
+        <label>Description</label>
+        <textare name="description"></textare>
+    </fieldset>
+
+    <fieldset>
+        <label>Budget</label>
+        <input type="text" name="budget" />
+    </fieldset>
+
+    <fieldset>
+        <label>Job type</label>
+        <select name="type">
+            <option>Fixed</option>
+            <option>Hourly</option>
+        </select>
+    </fieldset>
+
+    <fieldset>
+        <label>Expertize level</label>
+        <select name="expertizeLevel">
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Expert</option>
+        </select>
+    </fieldset>
+
+    <p>
+        <input type="submit" class="btn btn-success">
+    </p>
+</form>

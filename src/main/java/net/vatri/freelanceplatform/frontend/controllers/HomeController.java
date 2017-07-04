@@ -6,15 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Map;
-
 @EnableAutoConfiguration
 @Controller
-@RequestMapping("/frontend")
+@RequestMapping("/")
 public class HomeController {
-    @GetMapping("/home")
+    @GetMapping
     public String home(Model model){
-        model.addAttribute("name","Boris");
         return "frontend/home";
     }
 }
