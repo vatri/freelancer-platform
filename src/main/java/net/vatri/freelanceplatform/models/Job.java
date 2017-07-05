@@ -1,10 +1,6 @@
 package net.vatri.freelanceplatform.models;
 
 import javax.persistence.*;
-import java.util.List;
-
-//enum JobType{ FIXED, HOURLY }
-//enum ExpertizeLevel{ BEGINNER = "beginner", INTERMEDIATE, EXPERT }
 
 @Entity
 public class Job {
@@ -15,7 +11,9 @@ public class Job {
     private String type;
     private String expertizeLevel;
     private String created;
-//    private List interviewQuestions;
+    private User author;
+    private Category category;
+    // private List interviewQuestions;
 
 
     @Id
@@ -76,11 +74,24 @@ public class Job {
         this.created = created;
     }
 
-//    public List getInterviewQuestions() {
-//        return interviewQuestions;
-//    }
-//
-//    public void setInterviewQuestions(List interviewQuestions) {
-//        this.interviewQuestions = interviewQuestions;
-//    }
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id")
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "author_id")
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User user) {
+        this.author = user;
+    }
+
 }

@@ -1,18 +1,27 @@
+
+
 .navbar-default {
     border-radius: 0;
     background: #369;
 }
 
+/* Main, left menu */
 .navbar-default .navbar-nav>li>a
         ,.navbar-default .navbar-brand
         ,.navbar-default .navbar-brand:hover {
     color:white;
     text-shadow: none;
 }
-
 .navbar-default .navbar-nav>li>a:hover{
-    color: #b5b5b5;
- }
+    color: #fff;
+}
+
+/* Navbar, right menu */
+.nav>li>a , .nav > li > a:hover{ color: white; background: none; }
+.nav li a:hover{
+    text-decoration: underline;
+}
+
 
 .job-details-description{
     border-radius: 7px;
