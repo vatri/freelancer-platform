@@ -17,8 +17,14 @@
                 <li><a href="/job">Find a job</a></li>
             </ul>
             <ul class="nav nav-pills pull-right">
-                <li role="presentation"><a th:href="@{/login}">Login</a></li>
-                <li role="presentation"><a th:href="@{/register}">Register</a></li>
+                <li sec:authorize="! isAuthenticated()" role="presentation"><a th:href="@{/login}">Login</a></li>
+                <li sec:authorize="! isAuthenticated()" role="presentation"><a th:href="@{/register}">Register</a></li>
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/profile}" sec:authentication="name"></a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/logout}">Log out</a>
+                </li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

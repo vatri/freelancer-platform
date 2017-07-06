@@ -37,12 +37,16 @@ public class FreelancePlatformApplication {
         return new RedisCache(objectMapper, redisCliFactory());
     }
 
-    /*todo
-    @Bean
-    public SpringTemplateEngine templateEngine() {
-        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        IDialect dialect = (IDialect) new LayoutDialect();
-        templateEngine.setDialect(dialect);
-        return templateEngine;
+
+/*    @Bean
+    public IDialect springSecurityDialect(){
+//        SpringTemplateEngine e = new SpringTemplateEngine();
+//        IDialect dialect = new LayoutDialect();
+        IDialect dialect = new SpringSecurityDialect();
+//        e.setDialect(dialect);
+//        e.addDialect(dialect);
+//        return e;
+        return dialect;
     }*/
+
 }

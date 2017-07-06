@@ -38,11 +38,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>nz.net.ultraq.thymeleaf</groupId>
-			<artifactId>thymeleaf-layout-dialect</artifactId>
-			<version>2.0.5</version>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>nz.net.ultraq.thymeleaf</groupId>-->
+			<!--<artifactId>thymeleaf-layout-dialect</artifactId>-->
+			<!--<version>2.0.5</version>-->
+		<!--</dependency>-->
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+        </dependency>
+
 
 
 		<dependency>

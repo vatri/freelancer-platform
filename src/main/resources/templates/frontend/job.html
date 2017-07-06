@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:include="frontend/partials/head(title=${job.title})">
 </head>
 <!--<div th:include="frontend/partials/head"></div>-->
@@ -21,11 +21,15 @@
             </p>
             <div class="job-details-description" th:utext="${job.description}"></div>
 
-
-
         </div>
         <div class="col-md-4">
             <h3>Client</h3>
+            <div sec:authorize="isAuthenticated()">
+                AUTHENTICATED
+            </div>
+            <div sec:authorize="!isAuthenticated()">
+                NOT AUTHENTICATED
+            </div>
             <p>
                 <i class="glyphicon glyphicon-map-marker"> </i> <span th:text="${job.author.location}"></span> <br />
                 <i class="glyphicon glyphicon-star"></i>

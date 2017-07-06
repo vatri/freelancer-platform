@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="frontend/partials/head(title='Login')">
+</head>
+<body>
+
+
+<div th:replace="frontend/partials/menu"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Login</h1>
+            <p th:if="${loginError}" class="error">Wrong user or password</p>
+            <form th:action="@{/login}" method="post">
+                <label for="email">Username</label>:
+                <input type="text" id="email" name="email" autofocus="autofocus" /> <br />
+                <label for="password">Password</label>:
+                <input type="password" id="password" name="password" /> <br />
+                <button class="btn btn-success">Log in</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
