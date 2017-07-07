@@ -5,20 +5,27 @@ import javax.validation.constraints.Null;
 
 @Entity
 public class Job {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String title;
     private String description;
     private Double budget;
     private String type;
     private String expertizeLevel;
     private String created;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "author_id")
     private User author;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id")
     private Category category;
     // private List interviewQuestions;
 
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return id;
     }
@@ -75,8 +82,6 @@ public class Job {
         this.created = created;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "category_id")
     public Category getCategory() {
         return category;
     }
@@ -85,8 +90,6 @@ public class Job {
         this.category = category;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "author_id")
     public User getAuthor() {
         return author;
     }

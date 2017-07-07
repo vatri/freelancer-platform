@@ -9,17 +9,12 @@ import java.util.List;
 @Entity
 public class Category {
 
-    private Long id;
-    private String name;
-
-    public Category(){ }
-    public Category(String id){
-        this.id = Long.parseLong(id);
-    }
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
     public Long getId() {
         return id;
     }

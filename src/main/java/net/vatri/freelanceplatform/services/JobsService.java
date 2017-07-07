@@ -1,7 +1,6 @@
 package net.vatri.freelanceplatform.services;
 
 import net.vatri.freelanceplatform.models.Job;
-import net.vatri.freelanceplatform.repositories.CategoryRepository;
 import net.vatri.freelanceplatform.repositories.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,14 @@ public class JobsService {
     }
 
     public List<Job> list(){
-        return jobRepository.findAll();
+
+        List<Job> result = jobRepository.findAll();
+
+        result.sort( (j1,j2) -> {
+            return j1.getId() > j2.getId() ? -1 : 0;
+        } );
+
+        return result;
     }
 
 }

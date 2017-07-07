@@ -1,27 +1,31 @@
 package net.vatri.freelanceplatform.models;
 
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class User{
 
-    private Integer id;
-    private String name;
-    private String email;
-    private String password;
-    private String location;
-    private String created;//Todo - Date type...
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
+    private Long id;
+
+    private String name;
+
+    @Column(unique = true)
+    private String email;
+
+    private String password;
+    private String created;//Todo - Date type...
+
+    @OneToOne(mappedBy = "user")
+    private Profile profile;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -33,7 +37,6 @@ public class User{
         this.name = name;
     }
 
-    @Column(unique = true)
     public String getEmail() {
         return email;
     }
@@ -50,19 +53,19 @@ public class User{
         this.password = password;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
     public String getCreated() {
         return created;
     }
 
     public void setCreated(String created) {
         this.created = created;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 }

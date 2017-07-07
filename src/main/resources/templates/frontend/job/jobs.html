@@ -17,7 +17,7 @@
                     </tr>
 
                     <tr th:each="job : ${jobs}">
-                        <td th:text="${job.title}"></td>
+                        <td th:text="'#' + ${job.id} +' '+ ${job.title}"></td>
                         <td>
                             <span class="job-list-description" th:utext="${job.description}"></span>
                             <p>&nbsp;</p>

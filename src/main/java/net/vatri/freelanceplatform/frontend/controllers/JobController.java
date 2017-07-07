@@ -1,20 +1,16 @@
 package net.vatri.freelanceplatform.frontend.controllers;
 
-
 import net.vatri.freelanceplatform.models.Job;
 import net.vatri.freelanceplatform.models.User;
 import net.vatri.freelanceplatform.services.CategoryService;
 import net.vatri.freelanceplatform.services.JobsService;
 import net.vatri.freelanceplatform.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
-@EnableAutoConfiguration
 @Controller
 @RequestMapping("/job")
 public class JobController {

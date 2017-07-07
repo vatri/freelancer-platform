@@ -10,7 +10,12 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    public User get(Long id){
+        return userRepository.findOne(id);
+    }
+
     public User getByEmail(String email){
         return userRepository.findByEmail(email);
     }
+
 }
