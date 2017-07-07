@@ -1,6 +1,5 @@
 package net.vatri.freelanceplatform.frontend.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import net.vatri.freelanceplatform.models.Profile;
 import net.vatri.freelanceplatform.models.User;
 import net.vatri.freelanceplatform.services.UserService;
@@ -9,7 +8,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,16 +20,12 @@ public class ProfileController {
     @Autowired
     UserService userService;
 
-                    @Autowired
-                    ObjectMapper objectMapper;
-
     @RequestMapping(value = { "", "/{id}" })
     public String viewProfile(@PathVariable("id") Optional<Long> profileIdParam , Model model){
 
-        // If profile not provided in URL, fetch current logged user
+        // If profile ID is not provided in URL, fetch current logged user
         Long profileId = profileIdParam.isPresent() ? profileIdParam.get() : 0L;
 
-        Profile profile;
         User user;
 
         if(profileId < 1) {
