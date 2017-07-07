@@ -1,13 +1,14 @@
 package net.vatri.freelanceplatform.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Null;
 
 @Entity
 public class Job {
     private long id;
     private String title;
     private String description;
-    private double budget;
+    private Double budget;
     private String type;
     private String expertizeLevel;
     private String created;
@@ -42,11 +43,11 @@ public class Job {
         this.description = description;
     }
 
-    public double getBudget() {
+    public Double getBudget() {
         return budget;
     }
 
-    public void setBudget(double budget) {
+    public void setBudget(Double budget) {
         this.budget = budget;
     }
 

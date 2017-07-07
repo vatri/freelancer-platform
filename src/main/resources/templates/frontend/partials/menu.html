@@ -23,6 +23,9 @@
                     <a th:href="@{/profile}" sec:authentication="name"></a>
                 </li>
                 <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/job/create}">Post a job</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
                     <a th:href="@{/logout}">Log out</a>
                 </li>
             </ul>

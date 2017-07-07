@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:include="frontend/partials/head(title=${job.title})">
+</head>
+<!--<div th:include="frontend/partials/head"></div>-->
+<body>
+<div th:replace="frontend/partials/menu"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1 th:text="${job.title}"></h1>
+            <p><span class="badge" th:text="${job.category.name}"></span></p>
+            <p>
+                <i class="glyphicon glyphicon-time"></i>
+                <span th:text="${job.created}"></span>
+                /
+                <i class="glyphicon glyphicon-usd"></i>
+                <span sec:authorize="isAuthenticated()">
+                    <span th:text="${job.budget}"></span>
+                    (<span th:text="${job.type}"></span>)
+                </span>
+                <span sec:authorize=" !isAuthenticated()">
+                    (hidden)
+                </span>
+                /
+                Expertize level: <span th:text="${job.expertizeLevel}"></span>
+            </p>
+            <div class="job-details-description" th:utext="${job.description}"></div>
+
+        </div>
+        <div class="col-md-4">
+            <h3>Client</h3>
+            <div sec:authorize="isAuthenticated()">
+                <p>
+                    <i class="glyphicon glyphicon-map-marker"> </i> <span th:text="${job.author.location}"></span> <br />
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    (4 jobs)
+                    <br />
+                    Hire rate: 60%
+                    <hr />
+                    Proposals: 44<br />
+                    Inverviewing: 4 (?)
+                    <hr />
+                </p>
+                <p><a href="#" class="btn btn-success">Bid</a></p>
+            </div>
+            <div sec:authorize=" !isAuthenticated()">
+                Login to see client details
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

@@ -5,4 +5,4 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository("jobRepository")
-public interface JobRepository extends JpaRepository<Job, Long> { }
+public interface JobRepository extends JpaRepository<Job, Long> {}
