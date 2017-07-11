@@ -20,9 +20,9 @@ public class User{
     private String email;
 
     private String password;
-    private String created;//Todo - Date type...
+    private String created;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Profile profile;
 
     public Long getId() {

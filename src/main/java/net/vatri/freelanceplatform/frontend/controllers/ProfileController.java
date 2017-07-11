@@ -8,9 +8,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -20,24 +20,44 @@ public class ProfileController {
     @Autowired
     UserService userService;
 
+    /**
+    * Get logged user
+     *
+     * @return net.vatri.freelanceplatform.models.User
+    **/
+    private User getCurrentUser(){
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails == false) {
+            return null;
+        }
+        String username = ((UserDetails) principal).getUsername();
+
+        return  userService.getByEmail(username);
+    }
+
     @RequestMapping(value = { "", "/{id}" })
     public String viewProfile(@PathVariable("id") Optional<Long> profileIdParam , Model model){
 
-        // If profile ID is not provided in URL, fetch current logged user
-        Long profileId = profileIdParam.isPresent() ? profileIdParam.get() : 0L;
+        Long userId = profileIdParam.isPresent() ? profileIdParam.get() : 0L;
 
+        User loggedUser = getCurrentUser();
         User user;
 
-        if(profileId < 1) {
-            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            if (principal instanceof UserDetails == false) {
+        boolean canEdit = false;
+
+        // If profile ID is not provided in URL, fetch currently logged user
+        if(userId < 1) {
+            user = loggedUser;
+            if(user == null){
                 return "redirect:/";
             }
-            String username = ((UserDetails) principal).getUsername();
-
-            user = userService.getByEmail(username);
+            canEdit = true;
         } else {
-            user = userService.get(profileId);
+            user = userService.get(userId);
+            if(userId == loggedUser.getId()){
+                canEdit = true;
+            }
         }
 
         if(user == null){
@@ -46,7 +66,42 @@ public class ProfileController {
 
         model.addAttribute("user", user);
         model.addAttribute("profile", user.getProfile());
+        model.addAttribute("canEdit", canEdit);
 
-        return "frontend/profile/view";
+        return "frontend/profile/view_profile";
+    }
+
+    @GetMapping("/edit")
+    public String editProfile(Model model){
+
+        User user = getCurrentUser();
+        model.addAttribute("user", user);
+
+        return "frontend/profile/edit_profile";
+    }
+
+    @PostMapping("/save")
+    public String saveProfile(@ModelAttribute @Valid User user, @ModelAttribute Profile profile, Model model){
+
+        //
+        // Get and update current logged user. Don't use params from input to prevent unauthorized editing.
+        User me = getCurrentUser();
+
+        me.setName( user.getName() );
+        me.setEmail( user.getEmail() );
+
+        user = null; // don't use this var anymore
+
+        if( me.getProfile() != null){
+            me.getProfile().setLinkedin(profile.getLinkedin());
+            me.getProfile().setLocation(profile.getLocation());
+            me.getProfile().setBiography(profile.getBiography());
+        } else {
+            me.setProfile(profile);
+            me.getProfile().setUser(me);
+        }
+        userService.save(me);
+
+        return "redirect:/profile";
     }
 }

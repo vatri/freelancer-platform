@@ -22,7 +22,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         httpSecurity
             //.authorizeRequests()
 //            .antMatchers("/frontend/**").permitAll()
-            .formLogin().loginPage("/login").usernameParameter("email").failureUrl("/login-error")
+            .formLogin()
+                .loginPage("/login").usernameParameter("email").failureUrl("/login-error")
                 .and().logout()
                     .logoutUrl("/logout").logoutSuccessUrl("/")
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"));

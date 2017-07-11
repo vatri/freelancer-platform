@@ -9,11 +9,14 @@
     <div class="row">
         <div class="col-md-8">
             <h1 th:text="${user.name}"></h1>
-
+            <div th:if="${canEdit}" class="text-right">
+                <a th:href="@{/profile/edit}" class="btn btn-primary">Edit profile</a>
+            </div>
 
             <div th:if="${profile != null}">
                 <p>
                     <i class="glyphicon glyphicon-map-marker"> </i> <span th:text="${profile.location}"></span>
+                    /
                     <a th:href="${profile.linkedin}" th:text="${profile.linkedin}"></a>
                 </p>
                 <div class="job-details-description" th:utext="${profile.biography}"></div>
@@ -22,7 +25,6 @@
             <div th:if="${profile == null}">
                 This user hasn't created profile yet.
             </div>
-
         </div>
     </div>
 </div>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="frontend/partials/head(title=${user.name})"></head>
+<body>
+<div th:replace="frontend/partials/menu"></div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Edit profile</h1>
+
+            <form th:action="@{/profile/save}" method="post">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" autofocus="autofocus" required="required" class="form-control" th:value="${user?.name}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail</label>:
+                    <input type="text" id="email" name="email" required="required" class="form-control" th:value="${user?.email}" /> <br />
+                </div>
+
+                <div class="form-group">
+                    <label for="biography">Biography</label>:
+                    <textarea id="biography" name="biography" required="required" class="form-control" th:utext="${user?.profile?.biography}"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location</label>:
+                    <input type="text" id="location" name="location" required="required" class="form-control" th:value="${user?.profile?.location}" /> <br />
+                </div>
+
+                <div class="form-group">
+                    <label for="linkedin">Linkedin</label>:
+                    <input type="text" id="linkedin" name="linkedin" required="required" class="form-control" th:value="${user?.profile?.linkedin}" /> <br />
+                </div>
+
+
+                <div class="form-group">
+                    <button class="btn btn-success">Save</button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

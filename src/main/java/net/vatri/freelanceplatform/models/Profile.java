@@ -1,5 +1,7 @@
 package net.vatri.freelanceplatform.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,7 @@ public class Profile {
     private String location;
 
     @OneToOne
+    @JsonBackReference
     private User user;
 
     public Long getId() {
@@ -48,4 +51,11 @@ public class Profile {
         this.location = location;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
