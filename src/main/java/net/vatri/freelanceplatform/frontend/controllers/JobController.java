@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class JobController {
 
     @Autowired
-    private JobsService jobsService;
+    JobsService jobsService;
 
     @Autowired
     CategoryService categoryService;

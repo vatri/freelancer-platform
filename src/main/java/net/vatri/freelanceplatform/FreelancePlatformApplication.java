@@ -3,11 +3,13 @@ package net.vatri.freelanceplatform;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.vatri.freelanceplatform.cache.Cache;
 import net.vatri.freelanceplatform.cache.RedisCache;
+import net.vatri.freelanceplatform.validators.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.validation.Validator;
 import redis.clients.jedis.Jedis;
 
 @SpringBootApplication
@@ -37,6 +39,10 @@ public class FreelancePlatformApplication {
         return new RedisCache(objectMapper, redisCliFactory());
     }
 
+    @Bean
+    public Validator userValidator(){
+        return new UserValidator();
+    }
 
 /*    @Bean
     public IDialect springSecurityDialect(){

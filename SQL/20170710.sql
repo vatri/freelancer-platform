@@ -1,0 +1,1 @@
+ALTER TABLE `freelancer`.`users` ADD UNIQUE (`email`);

@@ -1,5 +1,8 @@
 package net.vatri.freelanceplatform.models;
 
+
+import org.hibernate.validator.constraints.Email;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +16,7 @@ public class User{
     private String name;
 
     @Column(unique = true)
+    @Email
     private String email;
 
     private String password;
