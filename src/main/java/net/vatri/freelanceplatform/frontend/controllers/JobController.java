@@ -1,9 +1,13 @@
 package net.vatri.freelanceplatform.frontend.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import net.vatri.freelanceplatform.models.Bid;
 import net.vatri.freelanceplatform.models.Job;
 import net.vatri.freelanceplatform.models.User;
+import net.vatri.freelanceplatform.services.BidService;
 import net.vatri.freelanceplatform.services.CategoryService;
-import net.vatri.freelanceplatform.services.JobsService;
+import net.vatri.freelanceplatform.services.JobService;
 import net.vatri.freelanceplatform.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,27 +17,41 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/job")
-public class JobController {
+public class JobController extends AbstractController{
 
     @Autowired
-    JobsService jobsService;
+    JobService jobService;
 
     @Autowired
     CategoryService categoryService;
 
     @Autowired
-    UserService userService;
+    BidService bidService;
 
     @GetMapping
     public String listJobs(Model model){
-        model.addAttribute("jobs", jobsService.list());
+        model.addAttribute("jobs", jobService.list());
         return "frontend/job/jobs";
     }
 
     @GetMapping("/{id}")
     public String viewJob(Model model, @PathVariable("id") long id){
-        model.addAttribute("job", jobsService.get(id));
-        return "frontend/job/job";
+
+        Job job = jobService.get(id);
+
+        model.addAttribute("job", job);
+
+        // Get my bid for the job and assign to the view
+        Bid myBid = null;
+
+        // Check if logged in:
+        User currentUser = super.getCurrentUser();
+        if( currentUser != null){
+            myBid = bidService.getUsersBidByJob(currentUser, job);
+        }
+        model.addAttribute("myBid", myBid);
+
+        return "frontend/job/view_job";
     }
 
     @GetMapping("/create")
@@ -54,21 +72,18 @@ public class JobController {
         }
 
         // Set current loged user ID as author
-        org.springframework.security.core.userdetails.User authUser = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User author = userService.getByEmail(authUser.getUsername());
-
+        User author = super.getCurrentUser();
+        if(author == null){
+            System.out.println("Please login to add a job!");
+            return null;
+        }
         job.setAuthor(author);
 
         Job savedJob = null;
         if( id != null && id > 0){
-            savedJob = new Job();
-            try {
-                throw new Exception("ERROR");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+// TODO
         } else {
-            savedJob = jobsService.add(job);
+            savedJob = jobService.add(job);
         }
         return "redirect:/job/" + savedJob.getId();
     }

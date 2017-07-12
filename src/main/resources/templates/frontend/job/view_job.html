@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:include="frontend/partials/head(title=${job.title})">
+</head>
+<!--<div th:include="frontend/partials/head"></div>-->
+<body>
+<div th:replace="frontend/partials/menu"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1 th:text="${job.title}"></h1>
+            <p><span class="badge" th:text="${job.category.name}"></span></p>
+            <p>
+                <i class="glyphicon glyphicon-time"></i>
+                <span th:text="${job.created}"></span>
+                /
+                <i class="glyphicon glyphicon-usd"></i>
+                <span sec:authorize="isAuthenticated()">
+                    <span th:text="${job.budget}"></span>
+                    (<span th:text="${job.type}"></span>)
+                </span>
+                <span sec:authorize=" !isAuthenticated()">
+                    (hidden)
+                </span>
+                /
+                Expertize level: <span th:text="${job.expertizeLevel}"></span>
+            </p>
+            <div class="job-details-description" th:utext="${job.description}"></div>
+
+            <hr />
+
+            <div sec:authorize="isAuthenticated()">
+
+                <div class="myBid" th:if="${myBid != null}">
+                    <h2>My bid</h2>
+                    <p>
+                        <i class="glyphicon glyphicon-time"></i>  <span th:text="${myBid.created}"></span><br />
+                        <i class="glyphicon glyphicon-usd"></i>  <span th:text="${myBid.price}"></span><br />
+                        Deadline: <span th:text="${myBid.deadline}"></span><br />
+                    </p>
+                    <div th:utext="${myBid.proposal}" class="job-details-description"></div>
+                </div>
+
+
+                <div id="bid-form" style="display: none;" th:if="${myBid == null}">
+                    <p><a href="javascript: $('#bid-form').slideDown();" class="btn btn-success">Bid</a></p>
+                    <form th:action="@{/bid/save}" method="post">
+
+                        <input type="hidden" name="job_id" th:value="${job.id}" />
+
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <input type="number" id="price" name="price" required="required" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="deadline">Deadline / durration (optional)</label>
+                            <input type="text" id="deadline" name="deadline" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="proposal">Proposal</label>
+                            <textarea id="proposal" name="proposal" class="form-control" required="required" rows="15"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success btn-lg">
+                                Place a bid
+                            </button>
+                        </div>
+                    </form>
+
+                    <script type="text/javascript">
+                            $("#bid-form").on("submit", function(event){
+    //                            event.preventDefault();
+                                if(!confirm("Are you sure?")){
+                                    return false;
+                                }
+
+    //                            $(this).submit();
+                                return true;
+                            });
+                    </script>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <h3><a th:href="@{'/profile/' + ${job.author.id} }">Client</a></h3>
+            <div sec:authorize="isAuthenticated()">
+                <p th:if="${job.author.profile != null}">
+                    <i class="glyphicon glyphicon-map-marker"> </i> <span th:text="${job.author.profile.location}"></span> <br />
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    (4 jobs)
+                    <br />
+                    Hire rate: 60%
+                    <hr />
+                    Proposals: 44<br />
+                    Inverviewing: 4 (?)
+                    <hr />
+                </p>
+            </div>
+            <div sec:authorize=" !isAuthenticated()">
+                Login to see client details
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

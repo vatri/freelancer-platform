@@ -11,7 +11,7 @@
             <h1>Login</h1>
             <p th:if="${loginError}" class="error">Wrong user or password</p>
             <form th:action="@{/login}" method="post">
-                <label for="email">Username</label>:
+                <label for="email">E-mail</label>:
                 <input type="text" id="email" name="email" autofocus="autofocus" class="form-control" /> <br />
                 <label for="password">Password</label>:
                 <input type="password" id="password" name="password" class="form-control" /> <br />

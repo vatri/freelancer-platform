@@ -4,8 +4,6 @@ import net.vatri.freelanceplatform.models.Profile;
 import net.vatri.freelanceplatform.models.User;
 import net.vatri.freelanceplatform.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,43 +13,28 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/profile")
-public class ProfileController {
+public class ProfileController extends AbstractController {
 
     @Autowired
     UserService userService;
-
-    /**
-    * Get logged user
-     *
-     * @return net.vatri.freelanceplatform.models.User
-    **/
-    private User getCurrentUser(){
-
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof UserDetails == false) {
-            return null;
-        }
-        String username = ((UserDetails) principal).getUsername();
-
-        return  userService.getByEmail(username);
-    }
 
     @RequestMapping(value = { "", "/{id}" })
     public String viewProfile(@PathVariable("id") Optional<Long> profileIdParam , Model model){
 
         Long userId = profileIdParam.isPresent() ? profileIdParam.get() : 0L;
 
-        User loggedUser = getCurrentUser();
-        User user;
+        User loggedUser = super.getCurrentUser();
 
+        if(loggedUser == null){
+            return "redirect:/";
+        }
+
+        User user;
         boolean canEdit = false;
 
         // If profile ID is not provided in URL, fetch currently logged user
         if(userId < 1) {
             user = loggedUser;
-            if(user == null){
-                return "redirect:/";
-            }
             canEdit = true;
         } else {
             user = userService.get(userId);

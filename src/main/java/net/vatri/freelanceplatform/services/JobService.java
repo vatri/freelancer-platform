@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class JobsService {
+public class JobService {
 
     @Autowired
     JobRepository jobRepository;
