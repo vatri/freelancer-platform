@@ -1,5 +1,6 @@
 package net.vatri.freelanceplatform.frontend.controllers;
 
+import java.util.List;
 import net.vatri.freelanceplatform.models.Profile;
 import net.vatri.freelanceplatform.models.User;
 import net.vatri.freelanceplatform.services.UserService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Optional;
+import net.vatri.freelanceplatform.services.BidService;
 
 @Controller
 @RequestMapping("/profile")
@@ -17,6 +19,9 @@ public class ProfileController extends AbstractController {
 
     @Autowired
     UserService userService;
+    
+    @Autowired
+    BidService bidService;
 
     @RequestMapping(value = { "", "/{id}" })
     public String viewProfile(@PathVariable("id") Optional<Long> profileIdParam , Model model){
@@ -46,10 +51,17 @@ public class ProfileController extends AbstractController {
         if(user == null){
             return "redirect:/";
         }
+        
+        
+        List myBids = null;
+        if( canEdit){
+            myBids = bidService.findByUser(user);
+        }
 
         model.addAttribute("user", user);
         model.addAttribute("profile", user.getProfile());
         model.addAttribute("canEdit", canEdit);
+        model.addAttribute("myBids", myBids);
 
         return "frontend/profile/view_profile";
     }

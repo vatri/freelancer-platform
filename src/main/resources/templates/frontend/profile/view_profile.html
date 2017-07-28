@@ -27,6 +27,19 @@
             </div>
         </div>
     </div>
+    
+    <div class="row" th:if="${canEdit}">
+        <div class="col-md-8">
+            <h1>My Bids</h1>
+            
+            <p th:each="bid : ${myBids}">
+                
+                <a th:href="@{'/job/' + ${bid.job.id}}" th:text="${bid.job.title}"></a>
+            </p>
+        </div>
+    </div>
+    
+    
 </div>
 
 

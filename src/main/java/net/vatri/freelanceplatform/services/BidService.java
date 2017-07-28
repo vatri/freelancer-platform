@@ -27,11 +27,18 @@ public class BidService {
 
         List<Bid> bids = bidRepository.findByUserIdAndJobId(user.getId(), job.getId());
 
+        if(bids.isEmpty()){
+            return null;
+        }
+        
         if(bids.size() > 1){
             System.out.println("ERROR: found more more than 1 user's bids for a job.");
         }
-
         return bids.get(0);
+    }
+    
+    public List<Bid> findByUser(User user){
+        return bidRepository.findByUser(user);
     }
 
 }
