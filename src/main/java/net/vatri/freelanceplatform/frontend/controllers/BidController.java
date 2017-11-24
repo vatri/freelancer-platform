@@ -1,5 +1,6 @@
 package net.vatri.freelanceplatform.frontend.controllers;
 
+import net.vatri.freelanceplatform.helpers.FreelancePlatformHelper;
 import net.vatri.freelanceplatform.models.Bid;
 import net.vatri.freelanceplatform.models.Job;
 import net.vatri.freelanceplatform.models.User;
@@ -32,9 +33,12 @@ public class BidController extends AbstractController{
         }
 
         Job job = jobService.get(jobId);
+        
+        String created = FreelancePlatformHelper.getCurrentMySQLDate();
 
         bid.setJob(job);
         bid.setUser(user);
+        bid.setCreated(created);
 
         Bid savedBid = bidService.save(bid);
         return "redirect:/job/" + job.getId();
