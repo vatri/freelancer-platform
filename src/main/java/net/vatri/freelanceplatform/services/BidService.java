@@ -12,20 +12,20 @@ import java.util.List;
 @Service
 public class BidService {
 
-    @Autowired
-    BidRepository bidRepository;
+	@Autowired
+	BidRepository bidRepository;
 
-    public Bid save(Bid bid){
-        return bidRepository.save(bid);
-    }
+	public Bid save(Bid bid) {
+		return bidRepository.save(bid);
+	}
 
-    public Bid get(Long id){
-        return bidRepository.findOne(id);
-    }
+	public Bid get(Long id) {
+		return bidRepository.findOne(id);
+	}
 
-    public Bid getUsersBidByJob(User user, Job job){
+	public Bid getUsersBidByJob(User user, Job job) {
 
-        List<Bid> bids = bidRepository.findByUserIdAndJobId(user.getId(), job.getId());
+		List<Bid> bids = bidRepository.findByUserIdAndJobId(user.getId(), job.getId());
 
         if(bids.isEmpty()){
             return null;
@@ -34,7 +34,12 @@ public class BidService {
         if(bids.size() > 1){
             System.out.println("ERROR: found more more than 1 user's bids for a job.");
         }
-        return bids.get(0);
+        try {
+            return bids.get(0);
+        } catch (IndexOutOfBoundsException e) {
+//          System.out.println("No bids found for this user");
+        }
+        return null;
     }
     
     public List<Bid> findByUser(User user){
