@@ -56,6 +56,10 @@ public class JobController extends AbstractController{
 
     @GetMapping("/create")
     public String createJob(Model model){
+    	User author = super.getCurrentUser();
+        if(author == null){
+        	return "redirect:/";
+        }
         model.addAttribute("categories", categoryService.list());
         return "frontend/job/create_job";
     }
