@@ -2,6 +2,8 @@ package net.vatri.freelanceplatform.frontend.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import net.vatri.freelanceplatform.helpers.FreelancePlatformHelper;
 import net.vatri.freelanceplatform.models.Bid;
 import net.vatri.freelanceplatform.models.Job;
 import net.vatri.freelanceplatform.models.User;
@@ -48,7 +50,12 @@ public class JobController extends AbstractController{
         User currentUser = super.getCurrentUser();
         if( currentUser != null){
             myBid = bidService.getUsersBidByJob(currentUser, job);
+            if(myBid != null) {
+	        	// New line to <br>
+	            myBid.setProposal(FreelancePlatformHelper.nl2br(myBid.getProposal()));
+            }
         }
+
         model.addAttribute("myBid", myBid);
 
         return "frontend/job/view_job";

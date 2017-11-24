@@ -34,7 +34,7 @@ public class BidService {
 		try {
 			return bids.get(0);
 		} catch (IndexOutOfBoundsException e) {
-			System.out.println("No bids found for this user");
+//			System.out.println("No bids found for this user");
 		}
 		return null;
 	}

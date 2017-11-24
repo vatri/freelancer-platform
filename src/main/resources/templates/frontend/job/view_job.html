@@ -25,7 +25,7 @@
                 /
                 Expertize level: <span th:text="${job.expertizeLevel}"></span>
             </p>
-            <div class="job-details-description" th:utext="${job.description}"></div>
+            <div class="job-details-description" th:text="${job.description}"></div>
 
             <hr />
 
@@ -42,9 +42,9 @@
                 </div>
 
 
-                <div id="bid-form" style="display: none;" th:if="${myBid == null}">
+                <div  th:if="${myBid == null}">
                     <p><a href="javascript: $('#bid-form').slideDown();" class="btn btn-success">Bid</a></p>
-                    <form th:action="@{/bid/save}" method="post">
+                    <form th:action="@{/bid/save}" method="post" style="display: none;" id="bid-form">
 
                         <input type="hidden" name="job_id" th:value="${job.id}" />
 
