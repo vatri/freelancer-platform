@@ -1,7 +1,5 @@
 package net.vatri.freelanceplatform.services;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import net.vatri.freelanceplatform.cache.Cache;
 import net.vatri.freelanceplatform.models.User;
 import net.vatri.freelanceplatform.repositories.UserRepository;
 import net.vatri.freelanceplatform.security.UserDetailsImpl;
@@ -22,25 +20,31 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private Cache cache;
-
-    @Autowired
-    private ObjectMapper objectMapper;
+//    @Autowired
+//    private Cache cache;
+//
+//    @Autowired
+//    private ObjectMapper objectMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = (User)cache.getItem("user/"+username, User.class);
-        if( user == null){
-            user = userRepository.findByEmail(username);
-        }
+//        User user = (User)cache.getItem("user/"+username, User.class);
+//        if( user == null){
+//            user = userRepository.findByEmail(username);
+//        }
+//
+//        if( user == null){
+//            throw new UsernameNotFoundException("No user found. Username tried: " + username);
+//        }
+//
+//        cache.setItem("user/"+username, user);
+    	
+    	User user = userRepository.findByEmail(username);
 
         if( user == null){
-            throw new UsernameNotFoundException("No user found. Username tried: " + username);
+        	throw new UsernameNotFoundException("No user found with this username: " + username);
         }
-
-        cache.setItem("user/"+username, user);
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
         grantedAuthorities.add(new SimpleGrantedAuthority("user"));
