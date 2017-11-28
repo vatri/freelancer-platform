@@ -15,9 +15,13 @@
 
             <div th:if="${profile != null}">
                 <p>
-                    <i class="glyphicon glyphicon-map-marker"> </i> <span th:text="${profile.location}"></span>
-                    /
-                    <a th:href="${profile.linkedin}" th:text="${profile.linkedin}"></a>
+                    <div th:if="${ !profile.location.isEmpty() }">
+	                    <i class="glyphicon glyphicon-map-marker"> </i>
+	                    <span th:text="${profile.location}"></span>
+                    </div>
+                    <div th:if="${ !profile.linkedin.isEmpty() }">
+	                	Linkedin: <a th:href="${profile.linkedin}" th:text="${profile.linkedin}"></a>
+                   	</div>
                 </p>
                 <div class="job-details-description" th:utext="${profile.biography}"></div>
             </div>

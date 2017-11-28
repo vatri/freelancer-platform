@@ -81,20 +81,12 @@ public class ProfileController extends AbstractController {
         //
         // Get and update current logged user. Don't use params from input to prevent unauthorized editing.
         User me = getCurrentUser();
-
+        
         me.setName( user.getName() );
         me.setEmail( user.getEmail() );
+        me.setProfile(profile);
+        me.getProfile().setUser(me);
 
-        user = null; // don't use this var anymore
-
-        if( me.getProfile() != null){
-            me.getProfile().setLinkedin(profile.getLinkedin());
-            me.getProfile().setLocation(profile.getLocation());
-            me.getProfile().setBiography(profile.getBiography());
-        } else {
-            me.setProfile(profile);
-            me.getProfile().setUser(me);
-        }
         userService.save(me);
 
         return "redirect:/profile";

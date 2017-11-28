@@ -19,6 +19,8 @@ public class User{
     @Email
     private String email;
 
+    @Column(nullable = false, 
+    	    updatable = false)
     private String password;
     private String created;
 

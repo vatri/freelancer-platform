@@ -1,8 +1,5 @@
 package net.vatri.freelanceplatform.frontend.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import net.vatri.freelanceplatform.helpers.FreelancePlatformHelper;
 import net.vatri.freelanceplatform.models.Bid;
 import net.vatri.freelanceplatform.models.Job;
@@ -10,9 +7,7 @@ import net.vatri.freelanceplatform.models.User;
 import net.vatri.freelanceplatform.services.BidService;
 import net.vatri.freelanceplatform.services.CategoryService;
 import net.vatri.freelanceplatform.services.JobService;
-import net.vatri.freelanceplatform.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -63,10 +58,6 @@ public class JobController extends AbstractController{
 
     @GetMapping("/create")
     public String createJob(Model model){
-    	User author = super.getCurrentUser();
-        if(author == null){
-        	return "redirect:/";
-        }
         model.addAttribute("categories", categoryService.list());
         return "frontend/job/create_job";
     }
