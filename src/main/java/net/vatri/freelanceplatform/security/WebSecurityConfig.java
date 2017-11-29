@@ -15,8 +15,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     	httpSecurity
 	        .authorizeRequests()
-	        .antMatchers("/job/create", "/job/save", "/profile/**", "/bid/save")
-	        	.authenticated()
+	        .antMatchers("/", "/css/**", "/favicon.ico").permitAll()
+	        .antMatchers("/login", "/register", "/job", "/job/view/*").permitAll()
+	        .anyRequest().authenticated()
+	        
 //	        	.antMatchers("/profile/{id}").access("@webSecurity.checkUserId(authentication,#userId)")
 //	        .antMatchers("/profile/{userId}").permitAll()
 	        

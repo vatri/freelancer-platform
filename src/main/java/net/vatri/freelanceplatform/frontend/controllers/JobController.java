@@ -31,7 +31,7 @@ public class JobController extends AbstractController{
         return "frontend/job/jobs";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/view/{id}")
     public String viewJob(Model model, @PathVariable("id") long id){
 
         Job job = jobService.get(id);
@@ -87,7 +87,7 @@ public class JobController extends AbstractController{
         } else {
             savedJob = jobService.add(job);
         }
-        return "redirect:/job/" + savedJob.getId();
+        return "redirect:/job/view/" + savedJob.getId();
     }
 
 }

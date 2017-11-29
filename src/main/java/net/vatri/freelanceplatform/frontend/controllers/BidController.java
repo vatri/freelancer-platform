@@ -41,6 +41,6 @@ public class BidController extends AbstractController{
         bid.setCreated(created);
 
         Bid savedBid = bidService.save(bid);
-        return "redirect:/job/" + job.getId();
+        return "redirect:/job/view/" + job.getId();
     }
 }
