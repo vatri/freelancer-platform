@@ -45,5 +45,9 @@ public class BidService {
     public List findByUser(User user){
         return bidRepository.findByUser(user);
     }
+    
+    public List findByJob(Job job) {
+    	return bidRepository.findByJob(job);
+    }
 
 }

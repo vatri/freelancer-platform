@@ -7,6 +7,9 @@ import net.vatri.freelanceplatform.models.User;
 import net.vatri.freelanceplatform.services.BidService;
 import net.vatri.freelanceplatform.services.CategoryService;
 import net.vatri.freelanceplatform.services.JobService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -91,5 +94,28 @@ public class JobController extends AbstractController{
         }
         return "redirect:/job/view/" + savedJob.getId();
     }
+
+    @GetMapping("/bids/{jobId}")
+    public String viewBids(Model model, @PathVariable("jobId") long jobId) {
+    	
+    	Job job = jobService.get(jobId);
+    	
+    	User me = getCurrentUser();
+    	
+    	if( job == null || job.getAuthor().getId() != me.getId() ) {
+    		System.out.println("Job not found or you don't have privileges");
+    		return "redirect:/job/view/" + jobId;
+    	}
+    	
+    	List bids = bidService.findByJob(job);
+    	
+    	model.addAttribute("job", job);
+    	model.addAttribute("bids", bids);
+    	
+    	// If me != author
+    	return "frontend/job/view_bids";
+    }
+
+   
 
 }
