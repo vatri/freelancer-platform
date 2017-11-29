@@ -1,0 +1,9 @@
+ALTER TABLE category ENGINE = InnoDB;
+ALTER TABLE bid ENGINE = InnoDB;
+ALTER TABLE profile ENGINE = InnoDB;
+
+alter table bid add FOREIGN KEY (job_id) REFERENCES job(id);
+alter table bid add FOREIGN KEY (user_id) REFERENCES users(id);
+
+alter table job add FOREIGN KEY (`category_id`) REFERENCES category(id);
+alter table job add FOREIGN KEY (`author_id`) REFERENCES users(id);
