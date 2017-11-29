@@ -1,0 +1,9 @@
+CREATE TABLE `message` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `user_sender` int(11) NOT NULL,
+ `user_receiver` int(11) NOT NULL,
+ `job_id` int(11),
+ `text` text not NULL,
+ `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
