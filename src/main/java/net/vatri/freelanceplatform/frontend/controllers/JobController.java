@@ -52,6 +52,8 @@ public class JobController extends AbstractController{
         }
 
         model.addAttribute("myBid", myBid);
+        
+        model.addAttribute("me", getCurrentUser());
 
         return "frontend/job/view_job";
     }

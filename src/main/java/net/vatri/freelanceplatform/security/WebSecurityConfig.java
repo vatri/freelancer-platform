@@ -18,10 +18,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	        .antMatchers("/", "/css/**", "/favicon.ico").permitAll()
 	        .antMatchers("/login", "/register", "/job", "/job/view/*").permitAll()
 	        .anyRequest().authenticated()
-	        
-//	        	.antMatchers("/profile/{id}").access("@webSecurity.checkUserId(authentication,#userId)")
-//	        .antMatchers("/profile/{userId}").permitAll()
-	        
 	        .and()
 	        .formLogin()
 	        	.loginPage("/login").usernameParameter("email").failureUrl("/login-error")
