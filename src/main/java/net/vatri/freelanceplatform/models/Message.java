@@ -4,32 +4,33 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Message {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    @ManyToOne
-    @JoinColumn(name = "user_sender", nullable = false)
-    private User userSender;
-    
-    @ManyToOne
-    @JoinColumn(name = "user_receiver", nullable = false)
-    private User userReceiver;
-    
-    @ManyToOne
-    @JoinColumn(name = "job_id", nullable = true)
-    private Job job;
-    
-    @Column(length = 64000)
-    private String text;
-    
-    private String created;
+	@ManyToOne
+	@JoinColumn(name = "user_sender", nullable = false)
+	private User userSender;
+
+	@ManyToOne
+	@JoinColumn(name = "user_receiver", nullable = false)
+	private User userReceiver;
+
+	@ManyToOne
+	@JoinColumn(name = "job_id", nullable = true)
+	private Job job;
+
+	@Column(length = 64000)
+	private String text;
+
+	private String created;
 
 	public Long getId() {
 		return id;
@@ -78,7 +79,5 @@ public class Message {
 	public void setCreated(String created) {
 		this.created = created;
 	}
-    
-    
 
 }
