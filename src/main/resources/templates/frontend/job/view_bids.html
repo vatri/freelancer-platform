@@ -32,9 +32,13 @@
                         <td th:text="${bid.deadline}"></td>
                         <td th:text="${bid.proposal}"></td>
                         <td>
-                        	<a class="btn btn-success">
+                        	<a class="btn btn-success" th:href="@{'/message/job_room/' + ${bid.job.id} + '/' + ${bid.user.id} }">
                         		<i class="glyphicon glyphicon-envelope"> </i>
                         		Message
+                        	</a>
+                        	<a class="btn btn-primary">
+                        		<i class="glyphicon glyphicon-ok"> </i>
+                        		Hire
                         	</a>
                        	</td>
                     </tr>

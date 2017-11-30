@@ -1,5 +1,7 @@
 package net.vatri.freelanceplatform.models;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,12 +18,12 @@ public class Message {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "user_sender", nullable = false)
-	private User userSender;
+	@JoinColumn(nullable = false)
+	private User sender;
 
 	@ManyToOne
-	@JoinColumn(name = "user_receiver", nullable = false)
-	private User userReceiver;
+	@JoinColumn(nullable = false)
+	private User receiver;
 
 	@ManyToOne
 	@JoinColumn(name = "job_id", nullable = true)
@@ -30,7 +32,7 @@ public class Message {
 	@Column(length = 64000)
 	private String text;
 
-	private String created;
+	private Date created;
 
 	public Long getId() {
 		return id;
@@ -40,20 +42,20 @@ public class Message {
 		this.id = id;
 	}
 
-	public User getUserSender() {
-		return userSender;
+	public User getSender() {
+		return sender;
 	}
 
-	public void setUserSender(User userSender) {
-		this.userSender = userSender;
+	public void setSender(User sender) {
+		this.sender = sender;
 	}
 
-	public User getUserReceiver() {
-		return userReceiver;
+	public User getReceiver() {
+		return receiver;
 	}
 
-	public void setUserReceiver(User userReceiver) {
-		this.userReceiver = userReceiver;
+	public void setReceiver(User receiver) {
+		this.receiver = receiver;
 	}
 
 	public Job getJob() {
@@ -72,11 +74,11 @@ public class Message {
 		this.text = text;
 	}
 
-	public String getCreated() {
+	public Date getCreated() {
 		return created;
 	}
 
-	public void setCreated(String created) {
+	public void setCreated(Date created) {
 		this.created = created;
 	}
 

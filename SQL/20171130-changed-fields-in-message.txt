@@ -1,0 +1,2 @@
+ALTER TABLE `message` CHANGE `user_sender` `sender_id` INT(11) NOT NULL;
+ALTER TABLE `message` CHANGE `user_receiver` `receiver_id` INT(11) NOT NULL;
