@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Message {
@@ -30,6 +31,7 @@ public class Message {
 	private Job job;
 
 	@Column(length = 64000)
+	@Size(min = 2)
 	private String text;
 
 	private Date created;

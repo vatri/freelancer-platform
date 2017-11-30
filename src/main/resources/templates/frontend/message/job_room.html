@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:include="frontend/partials/head(title=${job.title})">
+</head>
+<!--<div th:include="frontend/partials/head"></div>-->
+<body>
+	<div th:replace="frontend/partials/menu"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+
+				<h1>Messages</h1>
+
+				<h2 th:text="${contact.name}"></h2>
+
+				<div th:each="message : ${messages}" class="message-box">
+					<strong th:text="${message.sender.name}"></strong> 
+					(<span th:text="${#dates.format(message.created, 'MMM dd, yyyy')}"></span>)
+					:
+					<span th:text="${message.text}" class="message-message-text"></span>
+				</div>
+
+				<div class="message-new-message-container">
+					<form th:action="@{''}" method="post">
+						<p>
+							<textarea class="form-control" name="message" placeholder="Enter your message..."></textarea>
+						</p>
+						<p>
+							<button class="btn btn-primary btn-lg">Send</button>
+						</p>
+					</form>
+
+				</div>
+
+			</div>
+			<div class="col-md-4">
+				<h3>Other rooms</h3>
+				todo...
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+

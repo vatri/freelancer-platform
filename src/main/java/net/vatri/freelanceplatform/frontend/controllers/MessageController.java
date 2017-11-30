@@ -1,12 +1,16 @@
 package net.vatri.freelanceplatform.frontend.controllers;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import net.vatri.freelanceplatform.models.Job;
@@ -41,8 +45,42 @@ public class MessageController extends AbstractController {
 		model.addAttribute("contact", contractor);
 
 		List<Message> messages = messageService.findByJobAndContractor(job, contractor);
+
+		messages.sort( (Message o1, Message o2) -> {
+			return o2.getCreated().compareTo(o1.getCreated());
+		});
+		
 		model.addAttribute("messages", messages);
 
 		return "frontend/message/job_room";
+	}
+	
+	@PostMapping("/job_room/{jobId}/{contractor}")
+	public String sendMessageToJobRoom(
+			HttpServletRequest request,
+			@PathVariable("jobId") long jobId,
+			@PathVariable("contractor") long contractorId) throws Exception {
+		
+		Job job = jobService.get(jobId);
+		User contractor = userService.get(contractorId);
+		
+		// *Check if I have rights?
+		
+		String messageText = request.getParameter("message");
+		
+		Message message = new Message();
+		message.setJob(job);
+		message.setReceiver(contractor);
+		message.setSender(getCurrentUser());
+		message.setText(messageText);
+		message.setCreated( new Date() );
+
+		Message result = messageService.save(message);
+		if(result == null) {
+			throw new Exception("Can't save new message");
+		}
+		
+		return "redirect:" + request.getHeader("Referer");
+	
 	}
 }
