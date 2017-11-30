@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import net.vatri.freelanceplatform.models.Bid;
 import net.vatri.freelanceplatform.models.Job;
 import net.vatri.freelanceplatform.models.Message;
 import net.vatri.freelanceplatform.models.User;
+import net.vatri.freelanceplatform.services.BidService;
 import net.vatri.freelanceplatform.services.JobService;
 import net.vatri.freelanceplatform.services.MessageService;
 import net.vatri.freelanceplatform.services.UserService;
@@ -32,6 +34,9 @@ public class MessageController extends AbstractController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	BidService bidService;
 
 	@GetMapping("/job_room/{jobId}/{contractor}")
 	public String jobRoom(Model model, 
@@ -47,7 +52,7 @@ public class MessageController extends AbstractController {
 		List<Message> messages = messageService.findByJobAndContractor(job, contractor);
 
 		messages.sort( (Message o1, Message o2) -> {
-			return o2.getCreated().compareTo(o1.getCreated());
+			return o2.getId().compareTo(o1.getId());
 		});
 		
 		model.addAttribute("messages", messages);
@@ -63,8 +68,12 @@ public class MessageController extends AbstractController {
 		
 		Job job = jobService.get(jobId);
 		User contractor = userService.get(contractorId);
+		User me = getCurrentUser();
 		
-		// *Check if I have rights?
+		// Check if I have rights to add message:
+		if(! job.getAuthor().getId().equals(me.getId())) {
+			throw new Exception("Current user can not write message to this job");
+		}
 		
 		String messageText = request.getParameter("message");
 		
