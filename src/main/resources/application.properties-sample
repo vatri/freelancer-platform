@@ -1,7 +1,7 @@
 # Common app properties:
 #    https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 
-spring.datasource.url= jdbc:mysql://localhost:3306/freelance
+spring.datasource.url= jdbc:mysql://localhost:3306/freelance?useUnicode=true&characterEncoding=UTF-8
 spring.datasource.username=root
 spring.datasource.password=
 
