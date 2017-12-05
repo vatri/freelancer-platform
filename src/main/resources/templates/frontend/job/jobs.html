@@ -7,7 +7,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>Recent jobs</h1>
+                <h1 th:if="${isMyJobsPage} == false">Recent jobs</h1>
+                <h1 th:if="${isMyJobsPage} == true">My jobs</h1>
 
                 <table class="table table-stripped">
                     <tr>

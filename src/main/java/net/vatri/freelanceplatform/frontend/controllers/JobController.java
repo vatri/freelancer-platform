@@ -8,7 +8,11 @@ import net.vatri.freelanceplatform.services.BidService;
 import net.vatri.freelanceplatform.services.CategoryService;
 import net.vatri.freelanceplatform.services.JobService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,8 +33,24 @@ public class JobController extends AbstractController{
     BidService bidService;
 
     @GetMapping
-    public String listJobs(Model model){
-        model.addAttribute("jobs", jobService.list());
+    public String listJobs(Model model, HttpServletRequest request){
+    	
+    	String filt = request.getParameter("filter");
+    	User me = getCurrentUser();
+    	boolean isMyJobsPage = false;
+    	
+    	if( filt != null && filt.equals("myjobs") && me != null) {
+    		Map<String, Object> filter = new HashMap<>();
+    		filter.put("user", me );
+            model.addAttribute("jobs", jobService.list(filter));
+            
+            isMyJobsPage = true;
+    	} else {
+    		model.addAttribute("jobs", jobService.list());
+    	}
+    	
+    	model.addAttribute("isMyJobsPage", isMyJobsPage);
+    	
         return "frontend/job/jobs";
     }
 
