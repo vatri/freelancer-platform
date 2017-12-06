@@ -50,4 +50,10 @@ public class BidService {
     	return bidRepository.findByJob(job);
     }
 
+	public boolean acceptBid(Bid bid) {
+		bid.setAccepted(1);
+		save(bid);
+		return true;
+	}
+
 }

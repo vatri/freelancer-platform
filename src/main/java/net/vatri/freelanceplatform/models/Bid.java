@@ -19,6 +19,8 @@ public class Bid{
 
     @Column(length = 64000)
     private String proposal;
+    
+    private int accepted = 0;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -68,7 +70,15 @@ public class Bid{
         this.proposal = proposal;
     }
 
-    public User getUser() {
+    public int getAccepted() {
+		return accepted;
+	}
+
+	public void setAccepted(int accepted) {
+		this.accepted = accepted;
+	}
+
+	public User getUser() {
         return user;
     }
 

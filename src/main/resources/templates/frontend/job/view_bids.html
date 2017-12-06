@@ -17,7 +17,7 @@
             	<a th:href="@{'/job/view/' + ${job.id}}" class="btn btn-sm btn-primary">View job</a>
             </p>
             
-            <table class="table table-stripped">
+            <table class="table table-striped">
                     <tr>
                         <th>User / Rating</th>
                         <th>Price</th>
@@ -36,10 +36,14 @@
                         		<i class="glyphicon glyphicon-envelope"> </i>
                         		Message
                         	</a>
-                        	<a class="btn btn-primary">
+                        	<a th:if="${bid.accepted} == 0" class="btn btn-primary" th:href="@{ '/bid/accept/' + ${bid.id} }">
                         		<i class="glyphicon glyphicon-ok"> </i>
                         		Hire
                         	</a>
+                        	<span th:if="${bid.accepted} == 1" class="green text-success">
+                        		<i class="glyphicon glyphicon-ok"> </i>
+                        		Accepted
+                        	</span>
                        	</td>
                     </tr>
 
