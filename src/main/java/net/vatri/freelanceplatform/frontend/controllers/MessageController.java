@@ -49,6 +49,9 @@ public class MessageController extends AbstractController {
 		User contractor = userService.get(contractorId);
 		model.addAttribute("contact", contractor);
 
+		Bid bid = bidService.getUsersBidByJob(contractor, job);
+		model.addAttribute("bid", bid);
+		
 		List<Message> messages = messageService.findByJobAndContractor(job, contractor);
 
 		messages.sort( (Message o1, Message o2) -> {
