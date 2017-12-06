@@ -36,7 +36,7 @@
                         		<i class="glyphicon glyphicon-envelope"> </i>
                         		Message
                         	</a>
-                        	<a th:if="${bid.accepted} == 0" class="btn btn-primary" th:href="@{ '/bid/accept/' + ${bid.id} }">
+                        	<a onclick="if( ! confirm('Are you sure?')){ return false; }" th:if="${bid.accepted} == 0" class="btn btn-primary" th:href="@{ '/bid/accept/' + ${bid.id} }">
                         		<i class="glyphicon glyphicon-ok"> </i>
                         		Hire
                         	</a>
