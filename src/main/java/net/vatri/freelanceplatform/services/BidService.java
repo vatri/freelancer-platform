@@ -45,5 +45,15 @@ public class BidService {
     public List findByUser(User user){
         return bidRepository.findByUser(user);
     }
+    
+    public List findByJob(Job job) {
+    	return bidRepository.findByJob(job);
+    }
+
+	public boolean acceptBid(Bid bid) {
+		bid.setAccepted(1);
+		save(bid);
+		return true;
+	}
 
 }
