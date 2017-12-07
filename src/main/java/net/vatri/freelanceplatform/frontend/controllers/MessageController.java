@@ -56,21 +56,23 @@ public class MessageController extends AbstractController {
 						  @PathVariable("jobId") long jobId,
 						  @PathVariable("contractor") long contractorId) {
 
+		User me = getCurrentUser();
+		
 		Job job = jobService.get(jobId);
 		model.addAttribute("job", job);
 		
 		User contractor = userService.get(contractorId);
 		model.addAttribute("contact", contractor);
 
-		Bid bid = bidService.getUsersBidByJob(contractor, job);
+		Bid bid = job.getAuthor().getId() == me.getId() 
+				? bidService.getUsersBidByJob(contractor, job)
+				: bidService.getUsersBidByJob(me, job);
 		model.addAttribute("bid", bid);
 		
 		List<Message> messages = messageService.findByJobAndContractor(job, contractor);
-
 		messages.sort( (Message o1, Message o2) -> {
 			return o2.getId().compareTo(o1.getId());
 		});
-		
 		model.addAttribute("messages", messages);
 
 		return "frontend/message/job_room";
@@ -87,7 +89,7 @@ public class MessageController extends AbstractController {
 		User me = getCurrentUser();
 		
 		// Check if I have rights to add message:
-		if(! job.getAuthor().getId().equals(me.getId())) {
+		if(job.getAuthor().getId() != me.getId() && job.getAuthor().getId() != contractor.getId() ){
 			throw new Exception("Current user can not write message to this job");
 		}
 		
