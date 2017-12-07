@@ -6,7 +6,9 @@ import java.util.Collection;
 
 public class UserDetailsImpl extends org.springframework.security.core.userdetails.User{
 
-    String fullName;
+	private static final long serialVersionUID = 1L;
+	
+	String fullName;
 
     public UserDetailsImpl(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);

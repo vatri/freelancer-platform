@@ -1,7 +1,6 @@
 package net.vatri.freelanceplatform.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.Null;
 
 @Entity
 public class Job {

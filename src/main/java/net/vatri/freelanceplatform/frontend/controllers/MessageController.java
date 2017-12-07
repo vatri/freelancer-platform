@@ -37,6 +37,19 @@ public class MessageController extends AbstractController {
 	
 	@Autowired
 	BidService bidService;
+	
+	@GetMapping
+	public String myMessageRooms(Model model) {
+		
+		User me = getCurrentUser();
+		List<Message> messages = messageService.getRoomsByUser(me);
+		
+		model.addAttribute("messages", messages);
+		
+		model.addAttribute("my_id", me.getId());
+		
+		return "frontend/message/my_message_rooms";
+	}
 
 	@GetMapping("/job_room/{jobId}/{contractor}")
 	public String jobRoom(Model model, 

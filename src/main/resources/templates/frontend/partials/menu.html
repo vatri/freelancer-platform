@@ -28,6 +28,9 @@
                 <li sec:authorize="isAuthenticated()">
                     <a th:href="@{/job?filter=myjobs}">My jobs</a>
                 </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/message}">Messages</a>
+                </li>
                 
                 <li sec:authorize="isAuthenticated()">
                     <a th:href="@{/logout}">Log out</a>

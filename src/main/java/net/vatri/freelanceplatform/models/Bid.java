@@ -1,7 +1,5 @@
 package net.vatri.freelanceplatform.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 
 @Entity

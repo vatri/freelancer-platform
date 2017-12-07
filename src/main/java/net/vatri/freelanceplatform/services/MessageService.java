@@ -8,7 +8,10 @@ import net.vatri.freelanceplatform.repositories.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MessageService {
@@ -27,5 +30,36 @@ public class MessageService {
     public List<Message> findByJobAndContractor(Job job, User contractor) {
     	return messageRepository.findByJobAndSenderOrReceiver(job, contractor);
     }
+
+	public List<Message> getRoomsByUser(User me) {
+		List<Message> allMessages = messageRepository.findBySenderOrReceiver(me);
+		List<Message> result = new ArrayList<Message>();
+		//todo: filter out duplicated (show as rooms)
+		
+		Map<String,Message> uniqueRooms = new HashMap<String, Message>();
+		
+		
+		allMessages.forEach(m -> {
+			
+			// Unique hash map key "job-contributor"
+			String key = m.getJob() != null ? String.valueOf( m.getJob().getId()) : "X";
+			key += '-';
+			key += (m.getReceiver().getId() == me.getId() ? m.getSender().getId() : m.getReceiver().getId());
+			
+			// If room not exist in result add it to unique list
+			Message m2 = uniqueRooms.get(key);
+			if(m2 == null) {
+				uniqueRooms.put(key, m);
+			}
+			
+		});
+		
+		for(String t_key  : uniqueRooms.keySet()) {
+			result.add(uniqueRooms.get(t_key));
+		}
+		
+//		return allMessages;
+		return result;
+	}
 
 }
