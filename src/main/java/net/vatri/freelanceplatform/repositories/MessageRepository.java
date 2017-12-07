@@ -29,4 +29,14 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
 			+ " ORDER BY m.id DESC")
 	List<Message> findBySenderOrReceiver(@Param("user") User me);
 
+	@Query("SELECT m"
+			+ " FROM Message m"
+			+ " WHERE "
+				+ "( ( m.sender = :me AND m.receiver = :converser ) "
+				+ " OR "
+				+ " ( m.sender = :converser AND m.receiver = :me ) ) "
+				+ " AND m.job is null "
+			+ " ORDER BY m.id DESC")
+	List<Message> findByMyConversers(@Param("me") User me, @Param("converser") User converser);
+
 }

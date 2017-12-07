@@ -62,4 +62,8 @@ public class MessageService {
 		return result;
 	}
 
+	public List<Message> findByMyConversers(User me, User converser) {
+		return messageRepository.findByMyConversers(me,converser);
+	}
+
 }

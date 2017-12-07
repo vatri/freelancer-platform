@@ -64,15 +64,22 @@ public class MessageController extends AbstractController {
 		User contractor = userService.get(contractorId);
 		model.addAttribute("contact", contractor);
 
-		Bid bid = job.getAuthor().getId() == me.getId() 
-				? bidService.getUsersBidByJob(contractor, job)
-				: bidService.getUsersBidByJob(me, job);
-		model.addAttribute("bid", bid);
+		Bid bid = null;
+		List<Message> messages = null;
+		if( job != null){
+			bid = job.getAuthor().getId() == me.getId() 
+					? bidService.getUsersBidByJob(contractor, job)
+					: bidService.getUsersBidByJob(me, job);
 		
-		List<Message> messages = messageService.findByJobAndContractor(job, contractor);
-		messages.sort( (Message o1, Message o2) -> {
-			return o2.getId().compareTo(o1.getId());
-		});
+			
+			messages = messageService.findByJobAndContractor(job, contractor);
+			messages.sort( (Message o1, Message o2) -> {
+				return o2.getId().compareTo(o1.getId());
+			});
+		} else {
+			messages = messageService.findByMyConversers(me, contractor);
+		}
+		model.addAttribute("bid", bid);
 		model.addAttribute("messages", messages);
 
 		return "frontend/message/job_room";
@@ -89,14 +96,18 @@ public class MessageController extends AbstractController {
 		User me = getCurrentUser();
 		
 		// Check if I have rights to add message:
-		if(job.getAuthor().getId() != me.getId() && job.getAuthor().getId() != contractor.getId() ){
-			throw new Exception("Current user can not write message to this job");
+		if( job != null) {
+			if(job.getAuthor().getId() != me.getId() && job.getAuthor().getId() != contractor.getId() ){
+				throw new Exception("Current user can not write message to this job");
+			}
 		}
 		
 		String messageText = request.getParameter("message");
 		
 		Message message = new Message();
-		message.setJob(job);
+		if( job != null ) {
+			message.setJob(job);
+		}
 		message.setReceiver(contractor);
 		message.setSender(getCurrentUser());
 		message.setText(messageText);
