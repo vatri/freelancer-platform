@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:include="frontend/partials/head(title='My messages')">
+</head>
+<!--<div th:include="frontend/partials/head"></div>-->
+<body>
+	<div th:replace="frontend/partials/menu"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+
+				<h1>My message rooms</h1>
+
+				<table class="table table-stripped">
+                    <tr>
+                        <th>User</th>
+                        <th>Last message</th>
+                        <th>Job</th>
+                        <th> </th>
+                    </tr>
+
+                    <tr th:each="message : ${messages}">
+                        <td th:if="${message.sender.id == my_id}" th:text="${message.receiver.name}"></td>
+                        <td th:if="${message.sender.id != my_id}" th:text="${message.sender.name}"></td>
+                        
+                        <td>
+                        	<span th:text="${message.created}"></span><br />
+                        	<i>
+	                        	<span th:if="${#strings.length(message.text) &lt;= 20}" th:text="${message.text}"></span>
+	                        	<span th:if="${#strings.length(message.text) &gt; 20}" th:text="${#strings.substring(message.text,0,20)}"></span>
+	                        	...
+                        	</i>
+                        </td>
+                        <td>
+                        	<div th:if="${message.job != null}" th:text="${message.job.title}">-</div>
+                       	</td>
+                        <td>
+                        	<!-- <div th:if="${message.job != null}">
+	                        	<a th:if="${message.sender.id == my_id}"
+	                        	   th:href="@{ '/message/job_room/' + ${message.job.id} + '/' + ${message.receiver.id} }"
+	                        	   class="btn btn-primary">
+	                        	   		<i class="glyphicon glyphicon-envelope"> </i>
+	                       				Open
+	                        	</a>
+	                        	<a th:if="${message.sender.id != my_id}"
+	                        	   th:href="@{ '/message/job_room/' + ${message.job.id} + '/' + ${message.sender.id} }"
+	                        	   class="btn btn-primary">
+	                       				<i class="glyphicon glyphicon-envelope"> </i>
+	                       				Open
+	                        	</a>
+                        	</div>
+                        	<div th:if="${message.job == null}">
+                        		<a th:if="${message.sender.id == my_id}"
+	                        	   th:href="@{ '/message/room/' + ${message.receiver.id} }"
+	                        	   class="btn btn-primary">
+	                        	   		<i class="glyphicon glyphicon-envelope"> </i>
+	                       				Open
+	                        	</a>
+	                        	<a th:if="${message.sender.id != my_id}"
+	                        	   th:href="@{ '/message/room/' + ${message.sender.id} }"
+	                        	   class="btn btn-primary">
+	                       				<i class="glyphicon glyphicon-envelope"> </i>
+	                       				Open
+	                        	</a>
+                        	</div> -->
+                        	
+ 	                        	<a th:href="@{'/message/job_room/' + ${message.job != null ? message.job.id : 0} + '/' + ${message.sender.id == my_id ? message.receiver.id : message.sender.id}}"
+	                        	   class="btn btn-primary">
+	                        	   		<i class="glyphicon glyphicon-envelope"> </i>
+	                       				Open
+	                        	</a>
+                        </td>
+                    </tr>
+
+                </table>
+
+			</div>
+			
+		</div>
+	</div>
+</body>
+</html>
+
