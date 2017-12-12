@@ -41,10 +41,10 @@
 				<div th:if="${job != null}">
 					<h3>Contract details</h3>
 					<p>
-						<b>Price:</b> <span th:if="${bid != null}" th:text="${bid.price}"></span>
+						<b>Price:</b> <span th:text="${bid.price}"></span>
 						(<span th:text="${job.type}"></span>)
 						<br />
-						<b>Deadline:</b> <span th:if="${bid != null}" th:text="${bid.deadline}"></span>
+						<b>Deadline:</b> <span th:text="${bid.deadline}"></span>
 					</p>
 				</div>
 				<h3>Other rooms</h3>

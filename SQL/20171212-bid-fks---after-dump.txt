@@ -1,0 +1,6 @@
+update bid set user_id = 13;
+
+alter table bid add foreign key (user_id) references users(id);
+alter table bid add foreign key (job_id) references job(id);
+
+UPDATE `bid` SET `job_id` = '9', `created` = NULL WHERE `bid`.`id` = 1;
