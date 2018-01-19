@@ -1,4 +1,4 @@
-# Java Spring Freelancer Platform 
+# Java Spring Freelancer Platform (Alpha)
 
 Open Source platform for freelance portals based on Java Spring technology.
 
