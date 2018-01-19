@@ -34,4 +34,4 @@ Open CMD or Linux terminal and type following commands:
 3. mvn compile
 4. mvn spring-boot:run
 
-Or simply open project in Eclipse > right click on FreelancePlatformApplication.java > Runs As... > Java Application
+Or simply open project in Eclipse IDE > right click on FreelancePlatformApplication.java > Run As > Java Application
