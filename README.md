@@ -27,11 +27,15 @@ Open Source platform for freelance portals based on Java Spring technology.
 
 ## How to install and run 
 
-Open CMD or Linux terminal and type following commands:
+1. open CMD or Linux terminal and CD to (eclipse) projects root folder
+2. git clone [THIS REPO]
+3. CD to the cloned folder
+4. mvn clean install
+5. mvn compile
+6. mvn spring-boot:run
+7. Open URL in your browser http://localhost:8000
+8. (optional) Login with triva89@yahoo.com / 123456 credentials - it has some entries for test
 
-1. git clone [THIS REPO]
-2. mvn clean install
-3. mvn compile
-4. mvn spring-boot:run
+Note: you can also run project from Eclipse:
 
-Or simply open project in Eclipse IDE > right click on FreelancePlatformApplication.java > Run As > Java Application
+open project > right click on FreelancePlatformApplication.java > Run As > Java Application
