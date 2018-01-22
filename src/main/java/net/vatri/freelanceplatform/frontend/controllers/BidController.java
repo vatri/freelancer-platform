@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 @Controller
@@ -65,6 +67,23 @@ public class BidController extends AbstractController{
     	}
     	
     	return "redirect:/message/job_room/" + bid.getJob().getId() + "/" + bid.getUser().getId();
+    	
+    }
+    
+    @GetMapping("/my-contracts")
+    public String myContracts(Model model) throws Exception{
+    	
+    	User me = getCurrentUser();
+    	
+    	List<Bid> contracts = bidService.findByUser(me);
+    	
+    	contracts.removeIf(bid -> {
+    		return bid.getAccepted() == 0;
+    	});
+    	
+    	model.addAttribute("contracts", contracts);
+    	
+    	return "frontend/bid/my_contracts";
     	
     }
 }

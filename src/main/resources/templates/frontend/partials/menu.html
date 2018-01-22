@@ -26,6 +26,9 @@
                     <a th:href="@{/job/create}">Post a job</a>
                 </li>
                 <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/bid/my-contracts}">My contracts</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
                     <a th:href="@{/job?filter=myjobs}">My jobs</a>
                 </li>
                 <li sec:authorize="isAuthenticated()">
