@@ -22,6 +22,7 @@
     text-decoration: underline;
 }
 
+.main-container{ min-height: 800px; }
 
 .job-details-description{
     border-radius: 7px;

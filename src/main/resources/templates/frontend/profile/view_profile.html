@@ -5,7 +5,7 @@
 <div th:replace="frontend/partials/menu"></div>
 
 
-<div class="container">
+<div class="container main-container">
     <div class="row">
         <div class="col-md-8">
             <h1 th:text="${user.name}"></h1>
@@ -32,7 +32,7 @@
         </div>
     </div>
     
-    <div class="row" th:if="${canEdit}">
+    <div class="row" th:if="${canEdit}" id="bids">
         <div class="col-md-8">
             <h1>My Bids</h1>
             
