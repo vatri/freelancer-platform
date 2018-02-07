@@ -54,7 +54,7 @@ public class JobController extends AbstractController{
         return "frontend/job/jobs";
     }
 
-    @GetMapping("/view/{id}")
+    @GetMapping({"/view/{id}", "/{id}" })
     public String viewJob(Model model, @PathVariable("id") long id){
 
         Job job = jobService.get(id);
