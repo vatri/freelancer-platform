@@ -21,7 +21,7 @@
                     <tr th:each="bid : ${contracts}">
                     <td th:utext="${bid.job.title}"></td>
                         <td th:utext="${bid.price}"></td>
-                         <td><a th:href="@{'/message/job_room//' + ${bid.job.id} + '/' + ${bid.job.author.id} }" class="btn btn-primary">
+                         <td><a th:href="@{'/message/job_room/' + ${bid.job.id} + '/' + ${me.id == bid.user.id ? bid.job.author.id : bid.user.id} }" class="btn btn-primary">
                          	Job room &gt;
                        	</a></td>
                     </tr>

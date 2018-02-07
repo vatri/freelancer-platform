@@ -55,5 +55,9 @@ public class JobService {
 
         return result;
     }
+    
+    public List<Job> findByAuthor(User user){
+    	return jobRepository.findByAuthor(user);
+    }
 
 }

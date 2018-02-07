@@ -46,7 +46,7 @@ public class BidService {
         return bidRepository.findByUser(user);
     }
     
-    public List findByJob(Job job) {
+    public List<Bid> findByJob(Job job) {
     	return bidRepository.findByJob(job);
     }
 
@@ -54,6 +54,10 @@ public class BidService {
 		bid.setAccepted(1);
 		save(bid);
 		return true;
+	}
+
+	public List<Bid> findByMyJobs(User me) {
+		return bidRepository.findByMyJobs(me);
 	}
 
 }

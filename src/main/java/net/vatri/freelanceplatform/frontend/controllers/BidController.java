@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -75,13 +77,19 @@ public class BidController extends AbstractController{
     	
     	User me = getCurrentUser();
     	
-    	List<Bid> contracts = bidService.findByUser(me);
+    	Set<Bid> contracts = new HashSet<Bid>( bidService.findByUser(me) );
     	
+    	// List all bids for my jobs:
+    	List<Bid> bidsForMyJobs = bidService.findByMyJobs(me);
+
+    	contracts.addAll(bidsForMyJobs); // join
+    	    	
     	contracts.removeIf(bid -> {
     		return bid.getAccepted() == 0;
     	});
     	
     	model.addAttribute("contracts", contracts);
+    	model.addAttribute("me", me);
     	
     	return "frontend/bid/my_contracts";
     	
