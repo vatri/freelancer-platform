@@ -3,7 +3,6 @@ package net.vatri.freelanceplatform.repositories;
 
 import net.vatri.freelanceplatform.models.Bid;
 import net.vatri.freelanceplatform.models.Job;
-import net.vatri.freelanceplatform.models.Message;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

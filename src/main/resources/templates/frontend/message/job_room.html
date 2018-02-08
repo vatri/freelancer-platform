@@ -41,11 +41,17 @@
 				<div th:if="${job != null}">
 					<h3 th:if="${bid.accepted != 0}">Contract details</h3>
 					<h3 th:if="${bid.accepted == 0}">Proposal</h3>
+					<p th:if="${bid.accepted != 0}">
+						<span class="label label-primary">Accepted</span>
+					</p>
 					<p>
 						<b>Price:</b> <span th:text="${bid.price}"></span>
 						(<span th:text="${job.type}"></span>)
 						<br />
 						<b>Deadline:</b> <span th:text="${bid.deadline}"></span>
+					</p>
+					<p>
+						<a th:href="@{'/bid/close/' + ${bid.id} }" class="btn btn-success">Close contract</a>
 					</p>
 				</div>
 				<!-- <h3>Other rooms</h3>

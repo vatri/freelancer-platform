@@ -5,9 +5,12 @@ spring.datasource.url= jdbc:mysql://localhost:3306/freelance?useUnicode=true&cha
 spring.datasource.username=root
 spring.datasource.password=
 
-# none by default spring.jpa.hibernate.ddl-auto=update
+# FlyWay 
+#spring.jpa.hibernate.ddl-auto=validate < causes the bug due to missmatch between DB tables and Java Entities!
+#spring.datasource.validationQuery=SELECT 1
+spring.jpa.properties.hibernate.show_sql=true
+flyway.baselineOnMigrate=true
 
-#spring.jpa.properties.hibernate.show_sql=true
 spring.jpa.properties.hibernate.cache.use_query_cache = false
 spring.jpa.properties.hibernate.cache.use_second_level_cache = false
 spring.jpa.properties.hibernate.use_second_level_cache = false

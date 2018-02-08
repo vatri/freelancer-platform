@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:include="frontend/partials/head(title='Leave feedback')">
+</head>
+<body>
+<div th:replace="frontend/partials/menu"></div>
+<div class="container main-container">
+    <div class="row">
+        <div class="col-md-8">
+        	<h1>Leave a feedback</h1>
+        	
+        	<p>Job: <span th:text="${bid.job.title}"></span></p>
+        	<p>Contractor: <span th:text="${bid.user.name}"></span></p>
+    	    
+    	    <form method="POST" th:action="@{/feedback/save}">
+
+				<input name="bid_id" type="hidden" th:value="${bid.id}" />
+
+	        	<p><label>Rating</label> 
+	        		<select name="rate" style="width: 50px" required="required">
+		        		<option>1</option>
+		        		<option>2</option>
+		        		<option>3</option>
+		        		<option>4</option>
+		        		<option>5</option>
+	        		</select>
+	       		</p>
+	       		<p><label>Feedback</label></p>
+	       		<p><textarea name="feedback" rows="10" cols="100"></textarea></p>
+	       		<p><button class="btn btn-primary">Send</button></p>
+
+       		</form>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

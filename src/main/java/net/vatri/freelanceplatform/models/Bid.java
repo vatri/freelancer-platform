@@ -7,6 +7,7 @@ public class Bid{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(columnDefinition = "INTEGER(11)") // Fix of org.hibernate.tool.schema.spi.SchemaManagementException
     private Long id;
     private Double price;
 
@@ -19,6 +20,8 @@ public class Bid{
     private String proposal;
     
     private int accepted = 0;
+    
+    private int closed = 0;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -74,6 +77,14 @@ public class Bid{
 
 	public void setAccepted(int accepted) {
 		this.accepted = accepted;
+	}
+
+	public int getClosed() {
+		return closed;
+	}
+
+	public void setClosed(int closed) {
+		this.closed = closed;
 	}
 
 	public User getUser() {

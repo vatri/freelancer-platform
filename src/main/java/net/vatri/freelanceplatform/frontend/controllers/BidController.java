@@ -94,4 +94,21 @@ public class BidController extends AbstractController{
     	return "frontend/bid/my_contracts";
     	
     }
+    
+    @PostMapping("close/{bidId}")
+    public String close(Model model, @PathVariable("bidId") long bidId) throws Exception{
+    	
+    	User me = getCurrentUser();
+    	Bid bid = bidService.get(bidId);
+    	
+    	if(bid.getClosed() == 1 || bid.getJob().getAuthor().getId() == me.getId()) {
+    		throw new Exception("You can't close this bid! Already closed or you aren't owner of the job.");
+    	}
+    	
+    	bid.setClosed(1);
+    	
+    	bidService.save(bid);
+    	
+    	return "redirect:/feedback/" + bidId;
+    }
 }
