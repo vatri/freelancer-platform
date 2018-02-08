@@ -101,7 +101,7 @@ public class BidController extends AbstractController{
     	User me = getCurrentUser();
     	Bid bid = bidService.get(bidId);
     	
-    	if(bid.getClosed() == 1 || bid.getJob().getAuthor().getId() == me.getId()) {
+    	if(bid.getClosed() == 1 || bid.getJob().getAuthor().getId() != me.getId()) {
     		throw new Exception("You can't close this bid! Already closed or you aren't owner of the job.");
     	}
     	

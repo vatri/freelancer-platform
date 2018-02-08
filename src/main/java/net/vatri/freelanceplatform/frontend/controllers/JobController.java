@@ -127,7 +127,7 @@ public class JobController extends AbstractController{
     		return "redirect:/job/view/" + jobId;
     	}
     	
-    	List bids = bidService.findByJob(job);
+    	List<Bid> bids = bidService.findByJob(job);
     	
     	model.addAttribute("job", job);
     	model.addAttribute("bids", bids);
