@@ -12,7 +12,7 @@
 
 				<h1>Messages</h1>
 
-				<h2 th:text="${contact.name}"></h2>
+				<h3 th:text="${contact.name}"></h3>
 				<p th:if="${job != null}">
 					Job:
 					<a th:text="${job.title}" th:href="@{'/job/view/' + ${job.id} }"></a>
@@ -39,7 +39,8 @@
 			</div>
 			<div class="col-md-4">
 				<div th:if="${job != null}">
-					<h3>Contract details</h3>
+					<h3 th:if="${bid.accepted != 0}">Contract details</h3>
+					<h3 th:if="${bid.accepted == 0}">Proposal</h3>
 					<p>
 						<b>Price:</b> <span th:text="${bid.price}"></span>
 						(<span th:text="${job.type}"></span>)
@@ -47,8 +48,8 @@
 						<b>Deadline:</b> <span th:text="${bid.deadline}"></span>
 					</p>
 				</div>
-				<h3>Other rooms</h3>
-				todo...
+				<!-- <h3>Other rooms</h3>
+				todo... -->
 			</div>
 		</div>
 	</div>
