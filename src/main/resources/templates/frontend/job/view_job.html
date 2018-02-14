@@ -16,7 +16,7 @@
                 /
                 <i class="glyphicon glyphicon-usd"></i>
                 <span sec:authorize="isAuthenticated()">
-                    <span th:text="${job.budget}"></span>
+                    <span th:text="${#numbers.formatDecimal(job.budget, 0, 'POINT', 2, 'COMMA')}"></span>
                     (<span th:text="${job.type}"></span>)
                 </span>
                 <span sec:authorize=" !isAuthenticated()">
@@ -35,7 +35,7 @@
                     <h2>My bid</h2>
                     <p>
                         <i class="glyphicon glyphicon-time"></i>  <span th:text="${myBid.created}"></span><br />
-                        <i class="glyphicon glyphicon-usd"></i>  <span th:text="${myBid.price}"></span><br />
+                        <i class="glyphicon glyphicon-usd"></i>  <span th:text="${#numbers.formatDecimal(myBid.price, 0, 'POINT', 2, 'COMMA')}"></span><br />
                         Deadline: <span th:text="${myBid.deadline}"></span><br />
                     </p>
                     <div th:utext="${myBid.proposal}" class="job-details-description"></div>

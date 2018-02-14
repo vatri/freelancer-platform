@@ -8,7 +8,7 @@ spring.datasource.password=
 # FlyWay 
 #spring.jpa.hibernate.ddl-auto=validate < causes the bug due to missmatch between DB tables and Java Entities!
 #spring.datasource.validationQuery=SELECT 1
-spring.jpa.properties.hibernate.show_sql=true
+spring.jpa.properties.hibernate.show_sql=false
 flyway.baselineOnMigrate=true
 
 spring.jpa.properties.hibernate.cache.use_query_cache = false

@@ -20,7 +20,7 @@
 
                     <tr th:each="bid : ${contracts}">
                     <td th:utext="${bid.job.title}"></td>
-                        <td th:utext="${bid.price}"></td>
+                        <td th:utext="${#numbers.formatDecimal(bid.price, 0, 'POINT', 2, 'COMMA')}"></td>
                          <td><a th:href="@{'/message/job_room/' + ${bid.job.id} + '/' + ${me.id == bid.user.id ? bid.job.author.id : bid.user.id} }" class="btn btn-primary">
                          	Job room &gt;
                        	</a></td>

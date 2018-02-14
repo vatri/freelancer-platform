@@ -36,35 +36,6 @@
                         	<div th:if="${message.job != null}" th:text="${message.job.title}">-</div>
                        	</td>
                         <td>
-                        	<!-- <div th:if="${message.job != null}">
-	                        	<a th:if="${message.sender.id == my_id}"
-	                        	   th:href="@{ '/message/job_room/' + ${message.job.id} + '/' + ${message.receiver.id} }"
-	                        	   class="btn btn-primary">
-	                        	   		<i class="glyphicon glyphicon-envelope"> </i>
-	                       				Open
-	                        	</a>
-	                        	<a th:if="${message.sender.id != my_id}"
-	                        	   th:href="@{ '/message/job_room/' + ${message.job.id} + '/' + ${message.sender.id} }"
-	                        	   class="btn btn-primary">
-	                       				<i class="glyphicon glyphicon-envelope"> </i>
-	                       				Open
-	                        	</a>
-                        	</div>
-                        	<div th:if="${message.job == null}">
-                        		<a th:if="${message.sender.id == my_id}"
-	                        	   th:href="@{ '/message/room/' + ${message.receiver.id} }"
-	                        	   class="btn btn-primary">
-	                        	   		<i class="glyphicon glyphicon-envelope"> </i>
-	                       				Open
-	                        	</a>
-	                        	<a th:if="${message.sender.id != my_id}"
-	                        	   th:href="@{ '/message/room/' + ${message.sender.id} }"
-	                        	   class="btn btn-primary">
-	                       				<i class="glyphicon glyphicon-envelope"> </i>
-	                       				Open
-	                        	</a>
-                        	</div> -->
-                        	
  	                        	<a th:href="@{'/message/job_room/' + ${message.job != null ? message.job.id : 0} + '/' + ${message.sender.id == my_id ? message.receiver.id : message.sender.id}}"
 	                        	   class="btn btn-primary">
 	                        	   		<i class="glyphicon glyphicon-envelope"> </i>

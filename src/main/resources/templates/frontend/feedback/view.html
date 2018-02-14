@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:include="frontend/partials/head(title='View feedback')">
+</head>
+<body>
+<div th:replace="frontend/partials/menu"></div>
+<div class="container main-container">
+    <div class="row">
+        <div class="col-md-8">
+        	<h1>View feedbacks</h1>
+        	
+        	<h3 th:text="${bid.job.title}"></h3>
+        	<p>Contractor: <b th:text="${bid.user.name}"></b></p>
+    	    <p>Rating: <span th:text="${feedback.contractorRate}"></span> / 5</p>
+    	    <p>
+	    	    Feedback text:<br />
+	    	    <span th:text="${feedback.contractorFeedback}"></span>
+    	    </p>
+
+        	<p>Client: <b th:text="${bid.job.author.name}"></b></p>
+    	    <p>Rating: <span th:text="${feedback.clientRate}"></span> / 5 </p>
+    	    <p>
+	    	    Feedback text:<br />
+	    	    <span th:text="${feedback.clientFeedback}"></span>
+    	    </p>
+    	    
+    	    <p th:if="${can_post_feedback}">
+    	    	<a th:href="@{'/feedback/' + ${bid.id}}" class="btn btn-primary">
+    	    		Send feedback
+    	    	</a>
+    	    </p>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
