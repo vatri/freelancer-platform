@@ -2,10 +2,12 @@ package net.vatri.freelanceplatform.frontend.controllers;
 
 import net.vatri.freelanceplatform.helpers.FreelancePlatformHelper;
 import net.vatri.freelanceplatform.models.Bid;
+import net.vatri.freelanceplatform.models.Feedback;
 import net.vatri.freelanceplatform.models.Job;
 import net.vatri.freelanceplatform.models.User;
 import net.vatri.freelanceplatform.services.BidService;
 import net.vatri.freelanceplatform.services.CategoryService;
+import net.vatri.freelanceplatform.services.FeedbackService;
 import net.vatri.freelanceplatform.services.JobService;
 
 import java.util.HashMap;
@@ -31,6 +33,9 @@ public class JobController extends AbstractController{
 
     @Autowired
     BidService bidService;
+    
+    @Autowired
+    FeedbackService feedbackService;
 
     @GetMapping
     public String listJobs(Model model, HttpServletRequest request){
@@ -78,7 +83,32 @@ public class JobController extends AbstractController{
         
         model.addAttribute("me", getCurrentUser());
 
-        return "frontend/job/view_job";
+        // Calculate client rate:
+        List<Feedback> feedbacks = feedbackService.getClientFeedbacks(job.getAuthor());
+		int sum = 0;
+		int no = 0;
+		for (Feedback f : feedbacks) {
+			sum += f.getClientRate();
+			no++;
+		}
+		long avgClientFeedback = sum / no;
+		int totalFeedbackNo = feedbacks.size();
+
+		// Calculate hire rate:
+		List<Job> jobs = jobService.findByAuthor(job.getAuthor());
+		List<Job> hiredJobs = jobService.findHiredJobsByAuthor(job.getAuthor());
+		double totalJobsNo = jobs.size();
+		double hiredJobsNo = hiredJobs.size();
+		double hireRate = (hiredJobsNo / totalJobsNo) * 100; // percent
+
+		model.addAttribute("average_client_feedback_rate", avgClientFeedback);
+		model.addAttribute("reviews_no", totalFeedbackNo);
+		model.addAttribute("bids_no", bidService.findByJob(job).size());
+		model.addAttribute("hire_rate", (int) hireRate);
+		model.addAttribute("jobs_no", (int) totalJobsNo);
+		model.addAttribute("hired_jobs_no", (int) hiredJobsNo);
+
+		return "frontend/job/view_job";
     }
 
     @GetMapping("/create")

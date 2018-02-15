@@ -60,4 +60,8 @@ public class JobService {
     	return jobRepository.findByAuthor(user);
     }
 
+	public List<Job> findHiredJobsByAuthor(User user){
+		return jobRepository.findByAuthorAndHired(user);
+	}
+
 }

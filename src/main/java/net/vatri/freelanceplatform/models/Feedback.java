@@ -18,11 +18,12 @@ public class Feedback {
 	@JoinColumn(name = "bid_id", nullable = true)
 	private Bid bid;
 	
-	private int clientRate;
+	private Integer clientRate;
 	
 	private String clientFeedback;
 
-	private int contractorRate;
+	// Use wrapper class Integer instead int primitive to avoid PropertyAccessException: Null value was assigned to a property...
+	private Integer contractorRate; 
 	
 	private String contractorFeedback;
 
@@ -42,11 +43,11 @@ public class Feedback {
 		this.bid = bid;
 	}
 
-	public int getClientRate() {
+	public Integer getClientRate() {
 		return clientRate;
 	}
 
-	public void setClientRate(int clientRate) {
+	public void setClientRate(Integer clientRate) {
 		this.clientRate = clientRate;
 	}
 
@@ -58,11 +59,11 @@ public class Feedback {
 		this.clientFeedback = clientFeedback;
 	}
 
-	public int getContractorRate() {
+	public Integer getContractorRate() {
 		return contractorRate;
 	}
 
-	public void setContractorRate(int contractorRate) {
+	public void setContractorRate(Integer contractorRate) {
 		this.contractorRate = contractorRate;
 	}
 

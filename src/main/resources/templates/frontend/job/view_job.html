@@ -97,15 +97,19 @@
                 <p th:if="${job.author.profile != null}">
                     <i class="glyphicon glyphicon-map-marker"> </i> <span th:text="${job.author.profile.location}"></span> <br />
                     <i class="glyphicon glyphicon-star"></i>
-                    <i class="glyphicon glyphicon-star"></i>
-                    <i class="glyphicon glyphicon-star"></i>
-                    <i class="glyphicon glyphicon-star"></i>
-                    (4 jobs)
+                    <i th:if="${average_client_feedback_rate &gt; 1}" class="glyphicon glyphicon-star"></i>
+                    <i th:if="${average_client_feedback_rate &gt; 2}" class="glyphicon glyphicon-star"></i>
+                    <i th:if="${average_client_feedback_rate &gt; 3}" class="glyphicon glyphicon-star"></i>
+                    <i th:if="${average_client_feedback_rate &gt; 4}" class="glyphicon glyphicon-star"></i>
+                    <span th:text="${average_client_feedback_rate}"></span> / 5 
+                    (<span th:text="${reviews_no}"></span> reviews)
                     <br />
-                    Hire rate: 60%
+                    Hire rate: <span th:text="${hire_rate}"></span>% 
+                    ( <span th:text="${hired_jobs_no}"></span> / <span th:text="${jobs_no}"></span> )
                     <hr />
-                    Proposals: 44<br />
-                    Inverviewing: 4 (?)
+                    <h3>Job stats</h3>
+                    Bids: <span th:text="${bids_no}"></span><br />
+                    <!-- Inverviewing: 4 (?) -->
                     <hr />
                 </p>
             </div>
