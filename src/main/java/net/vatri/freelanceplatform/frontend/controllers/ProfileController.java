@@ -1,8 +1,11 @@
 package net.vatri.freelanceplatform.frontend.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.vatri.freelanceplatform.models.Bid;
+import net.vatri.freelanceplatform.models.Feedback;
+import net.vatri.freelanceplatform.models.JobHistory;
 import net.vatri.freelanceplatform.models.Profile;
 import net.vatri.freelanceplatform.models.User;
 import net.vatri.freelanceplatform.services.UserService;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Optional;
 import net.vatri.freelanceplatform.services.BidService;
+import net.vatri.freelanceplatform.services.FeedbackService;
 
 @Controller
 @RequestMapping("/profile")
@@ -24,6 +28,9 @@ public class ProfileController extends AbstractController {
     
     @Autowired
     BidService bidService;
+    
+    @Autowired
+    FeedbackService feedbackService;
 
     @RequestMapping(value = { "", "/{id}" })
     public String viewProfile(@PathVariable("id") Optional<Long> profileIdParam , Model model){
@@ -59,11 +66,33 @@ public class ProfileController extends AbstractController {
         if( canEdit ){
             myBids = bidService.findByUser(user);
         }
+        
+        List<Bid> closedBids = bidService.findByClosedAndUser(1, user);
+        
+        List<JobHistory> jobHistory = new ArrayList<>();
+        
+        for(Bid b : closedBids) {
+        	
+        	JobHistory jh = new JobHistory();
+        	Feedback feedback = feedbackService.findByBid(b);
+
+        	
+        	if(feedback != null) {
+        		
+            	jh.setBid(b);
+            	jh.setFeedback(feedback);
+            	        		
+        		jobHistory.add(jh);
+        	}
+        	
+        }
+        
 
         model.addAttribute("user", user);
         model.addAttribute("profile", user.getProfile());
         model.addAttribute("canEdit", canEdit);
         model.addAttribute("myBids", myBids);
+        model.addAttribute("job_history", jobHistory);
 
         return "frontend/profile/view_profile";
     }

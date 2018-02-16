@@ -24,6 +24,8 @@ public interface BidRepository extends JpaRepository<Bid, Long> {
 			+ " JOIN b.job j"
 			+ " WHERE j.author = :me ")
 	List<Bid> findByMyJobs(@Param("me") User me);
+	
+    List<Bid> findByClosedAndUser(int closed, User user);
     
     
 }

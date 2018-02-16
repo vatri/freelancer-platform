@@ -27,7 +27,7 @@
                     </tr>
 
                     <tr th:each="bid : ${bids}">
-                        <td th:text="${bid.user.name}"></td>
+                        <td><a th:href="@{'/profile/' + ${bid.user.id}}" th:text="${bid.user.name}"></a></td>
                         <td th:text="${#numbers.formatDecimal(bid.price, 0, 'POINT', 2, 'COMMA')}"></td>
                         <td th:text="${bid.deadline}"></td>
                         <td th:text="${bid.proposal}"></td>

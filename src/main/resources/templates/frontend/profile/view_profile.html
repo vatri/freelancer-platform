@@ -43,6 +43,28 @@
         </div>
     </div>
     
+    <div class="row">
+        <div class="col-md-8">
+            
+            <h1>Job history</h1>
+            
+            <div th:each="jh : ${job_history}">
+                
+                <p>
+	                <a th:href="@{'/job/' + ${jh.bid.job.id}}" th:text="${jh.bid.job.title}"></a>
+                </p>
+                <i class="glyphicon glyphicon-star"></i>
+                <i th:if="${jh.feedback.contractorRate &gt; 1}" class="glyphicon glyphicon-star"></i>
+                <i th:if="${jh.feedback.contractorRate &gt; 2}" class="glyphicon glyphicon-star"></i>
+                <i th:if="${jh.feedback.contractorRate &gt; 3}" class="glyphicon glyphicon-star"></i>
+                <i th:if="${jh.feedback.contractorRate &gt; 4}" class="glyphicon glyphicon-star"></i>
+                <p>
+	                <span th:text="${jh.feedback.contractorFeedback}"></span>
+                </p>
+                <hr />
+            </div>
+        </div>
+    </div>
     
 </div>
 
