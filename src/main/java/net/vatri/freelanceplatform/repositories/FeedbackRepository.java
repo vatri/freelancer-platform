@@ -24,7 +24,7 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
 			+ " JOIN b.job j "
 			+ " JOIN j.author u"
 			+ " WHERE u = :user ")
-	List<Feedback> getClientFeedbacks(@Param("user") User user);
+	List<Feedback> findByClient(@Param("user") User user);
 
     @Query("SELECT f"
 			+ " FROM Feedback f "

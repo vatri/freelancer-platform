@@ -16,7 +16,7 @@
                 /
                 <i class="glyphicon glyphicon-usd"></i>
                 <span sec:authorize="isAuthenticated()">
-                    <span th:text="${#numbers.formatDecimal(job.budget, 0, 'POINT', 2, 'COMMA')}"></span>
+                    <span th:if="${job.budget != null}" th:text="${#numbers.formatDecimal(job.budget, 0, 'POINT', 2, 'COMMA')}"></span>
                     (<span th:text="${job.type}"></span>)
                 </span>
                 <span sec:authorize=" !isAuthenticated()">
@@ -96,7 +96,7 @@
             <div sec:authorize="isAuthenticated()">
                 <p th:if="${job.author.profile != null}">
                     <i class="glyphicon glyphicon-map-marker"> </i> <span th:text="${job.author.profile.location}"></span> <br />
-                    <i class="glyphicon glyphicon-star"></i>
+                    <i th:if="${average_client_feedback_rate &gt; 0}" class="glyphicon glyphicon-star"></i>
                     <i th:if="${average_client_feedback_rate &gt; 1}" class="glyphicon glyphicon-star"></i>
                     <i th:if="${average_client_feedback_rate &gt; 2}" class="glyphicon glyphicon-star"></i>
                     <i th:if="${average_client_feedback_rate &gt; 3}" class="glyphicon glyphicon-star"></i>

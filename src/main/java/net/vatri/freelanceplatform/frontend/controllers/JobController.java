@@ -84,16 +84,19 @@ public class JobController extends AbstractController{
         model.addAttribute("me", getCurrentUser());
 
         // Calculate client rate:
-        List<Feedback> feedbacks = feedbackService.getClientFeedbacks(job.getAuthor());
-		int sum = 0;
-		int no = 0;
-		for (Feedback f : feedbacks) {
-			sum += f.getClientRate();
-			no++;
-		}
-		long avgClientFeedback = sum / no;
-		int totalFeedbackNo = feedbacks.size();
-
+        long avgClientFeedback = 0;
+		int totalFeedbackNo = 0;
+        List<Feedback> feedbacks = feedbackService.findByClient(job.getAuthor());
+        if(feedbacks.size() > 0) {
+			int sum = 0;
+			int no = 0;
+			for (Feedback f : feedbacks) {
+				sum += f.getClientRate();
+				no++;
+			}
+			avgClientFeedback = sum / no;
+			totalFeedbackNo = feedbacks.size();
+        }
 		// Calculate hire rate:
 		List<Job> jobs = jobService.findByAuthor(job.getAuthor());
 		List<Job> hiredJobs = jobService.findHiredJobsByAuthor(job.getAuthor());
