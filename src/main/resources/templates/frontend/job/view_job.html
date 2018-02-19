@@ -92,7 +92,7 @@
 
         </div>
         <div class="col-md-4">
-            <h3><a th:href="@{'/profile/' + ${job.author.id} }">Client</a></h3>
+            <h3><a th:href="@{'/profile/client/' + ${job.author.id} }" th:text="${job.author.name}"></a></h3>
             <div sec:authorize="isAuthenticated()">
                 <p th:if="${job.author.profile != null}">
                     <i class="glyphicon glyphicon-map-marker"> </i> <span th:text="${job.author.profile.location}"></span> <br />

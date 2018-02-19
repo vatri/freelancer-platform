@@ -59,11 +59,11 @@ public class MessageController extends AbstractController {
 		User me = getCurrentUser();
 		
 		Job job = jobService.get(jobId);
-		model.addAttribute("job", job);
 		
 		User contractor = userService.get(contractorId);
-		model.addAttribute("contact", contractor);
-
+		
+		String contactUrl = "/profile/" + contractor.getId();
+		
 		Bid bid = null;
 		List<Message> messages = null;
 		if( job != null){
@@ -71,6 +71,9 @@ public class MessageController extends AbstractController {
 					? bidService.getUsersBidByJob(contractor, job)
 					: bidService.getUsersBidByJob(me, job);
 		
+			if( job.getAuthor().getId() != me.getId() ) {
+				contactUrl = "/profile/client/" + contractor.getId();
+			}
 			
 			messages = messageService.findByJobAndContractor(job, contractor);
 			messages.sort( (Message o1, Message o2) -> {
@@ -79,6 +82,10 @@ public class MessageController extends AbstractController {
 		} else {
 			messages = messageService.findByMyConversers(me, contractor);
 		}
+		
+		model.addAttribute("job", job);
+		model.addAttribute("contact", contractor);
+		model.addAttribute("contact_url", contactUrl);
 		model.addAttribute("bid", bid);
 		model.addAttribute("messages", messages);
 

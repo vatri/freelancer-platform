@@ -12,11 +12,13 @@
 
 				<h1>Messages</h1>
 
-				<h3 th:text="${contact.name}"></h3>
+				<h3><a th:text="${contact.name}" th:href="${contact_url}"></a></h3>
+
 				<p th:if="${job != null}">
 					Job:
 					<a th:text="${job.title}" th:href="@{'/job/view/' + ${job.id} }"></a>
 				</p>
+
 				<div th:each="message : ${messages}" class="message-box">
 					<strong th:text="${message.sender.name}"></strong> 
 					(<span th:text="${#dates.format(message.created, 'MMM dd, yyyy')}"></span>)
