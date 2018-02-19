@@ -5,6 +5,8 @@ public class JobHistory {
 	private Bid bid;
 	
 	private Feedback feedback;
+	
+	private Job job;
 
 	public Bid getBid() {
 		return bid;
@@ -21,5 +23,13 @@ public class JobHistory {
 	public void setFeedback(Feedback feedback) {
 		this.feedback = feedback;
 	}
-	
+
+	public Job getJob() {
+		return job;
+	}
+
+	public void setJob(Job job) {
+		this.job = job;
+	}
+			
 }

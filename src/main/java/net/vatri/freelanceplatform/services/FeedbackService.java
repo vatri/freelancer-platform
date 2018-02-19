@@ -32,5 +32,9 @@ public class FeedbackService {
 	public List<Feedback> getClientFeedbacks(User user) {
 		return feedbackRepository.getClientFeedbacks(user);
 	}
+	
+	public Feedback findByJob(Job job) {
+		return feedbackRepository.findByJob(job);
+	}
 
 }

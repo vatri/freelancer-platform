@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.vatri.freelanceplatform.models.Bid;
 import net.vatri.freelanceplatform.models.Feedback;
+import net.vatri.freelanceplatform.models.Job;
 import net.vatri.freelanceplatform.models.JobHistory;
 import net.vatri.freelanceplatform.models.Profile;
 import net.vatri.freelanceplatform.models.User;
@@ -18,6 +19,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 import net.vatri.freelanceplatform.services.BidService;
 import net.vatri.freelanceplatform.services.FeedbackService;
+import net.vatri.freelanceplatform.services.JobService;
 
 @Controller
 @RequestMapping("/profile")
@@ -28,6 +30,9 @@ public class ProfileController extends AbstractController {
     
     @Autowired
     BidService bidService;
+    
+    @Autowired
+    JobService jobService;
     
     @Autowired
     FeedbackService feedbackService;
@@ -129,4 +134,44 @@ public class ProfileController extends AbstractController {
 
         return "redirect:/profile";
     }
+    
+    @GetMapping("/client/{id}")
+    public String viewClientProfile(@PathVariable("id") Long userId, Model model) throws Exception{
+    	
+    	User user = userService.get(userId);
+    	if( user == null ) {
+    		throw new Exception("User not found");
+    	}
+    	
+    	List<Job> clientJobs = jobService.findByAuthor(user);
+
+    	List<JobHistory> jobHistory = new ArrayList<>();
+        
+    	int totalJobs = 0;
+    	int hiredJobs = jobService.findHiredJobsByAuthor(user).size();
+    	
+        for(Job j : clientJobs) {
+        	
+        	totalJobs++;
+        	
+        	JobHistory jh = new JobHistory();
+        	Feedback feedback = feedbackService.findByJob(j);
+        	
+        	jh.setJob(j);
+        	jh.setFeedback(feedback);
+    		jobHistory.add(jh);
+        	
+        }
+
+        model.addAttribute("user", user);
+		model.addAttribute("profile", user.getProfile());
+		model.addAttribute("total_jobs", totalJobs);
+		model.addAttribute("hired_jobs", hiredJobs);
+		model.addAttribute("job_history", jobHistory);
+	
+    	return "frontend/profile/view_client_profile";
+    	
+    }
+
+
 }

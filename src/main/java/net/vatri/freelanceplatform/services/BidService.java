@@ -56,12 +56,12 @@ public class BidService {
 		return true;
 	}
 
-	public List<Bid> findByMyJobs(User me) {
-		return bidRepository.findByMyJobs(me);
+	public List<Bid> findByUserJobs(User user) {
+		return bidRepository.findByUserJobs(user);
 	}
 
 	public List<Bid> findByClosedAndUser(int closed, User user) {
 		return bidRepository.findByClosedAndUser(closed, user);
 	}
-
+	
 }

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="frontend/partials/head(title=${user.name})"></head>
+<body>
+<div th:replace="frontend/partials/menu"></div>
+
+
+<div class="container main-container">
+    <div class="row">
+        <div class="col-md-8">
+        	<h1>Client profile</h1>
+            <h1 th:text="${user.name}"></h1>
+           
+            <div th:if="${profile != null}">
+                <p>
+                    <div th:if="${ !profile.location.isEmpty() }">
+	                    <i class="glyphicon glyphicon-map-marker"> </i>
+	                    <span th:text="${profile.location}"></span>
+                    </div>
+                    <div th:if="${ !profile.linkedin.isEmpty() }">
+	                	Linkedin: <a th:href="${profile.linkedin}" th:text="${profile.linkedin}"></a>
+                   	</div>
+                </p>
+                <div class="job-details-description" th:utext="${profile.biography}"></div>
+            </div>
+
+            <div th:if="${profile == null}">
+                This user hasn't created profile yet.
+            </div>
+            
+            <div>
+	            <h3>
+	            	Hire rate:
+	            	<span th:text="${hired_jobs}"></span> / <span th:text="${total_jobs}"></span>
+            	</h3>
+            </div>
+            
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-8">
+            
+            <h1>Job history</h1>
+
+			<hr />
+
+            <div th:each="jh : ${job_history}">
+                
+                <p>
+	                <a th:href="@{'/job/' + ${jh.job.id}}" th:text="${jh.job.title}"></a>
+                </p>
+                <div th:if="${jh.feedback != null}">
+	                <i class="glyphicon glyphicon-star"></i>
+	                <i th:if="${jh.feedback.clientRate &gt; 1}" class="glyphicon glyphicon-star"></i>
+	                <i th:if="${jh.feedback.clientRate &gt; 2}" class="glyphicon glyphicon-star"></i>
+	                <i th:if="${jh.feedback.clientRate &gt; 3}" class="glyphicon glyphicon-star"></i>
+	                <i th:if="${jh.feedback.clientRate &gt; 4}" class="glyphicon glyphicon-star"></i>
+	                <p>
+		                <span th:text="${jh.feedback.clientFeedback}"></span>
+	                </p>
+                </div>
+                <hr />
+
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+</body>
+</html>

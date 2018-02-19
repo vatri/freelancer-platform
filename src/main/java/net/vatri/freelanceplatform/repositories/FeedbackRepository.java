@@ -3,6 +3,7 @@ package net.vatri.freelanceplatform.repositories;
 
 import net.vatri.freelanceplatform.models.Bid;
 import net.vatri.freelanceplatform.models.Feedback;
+import net.vatri.freelanceplatform.models.Job;
 import net.vatri.freelanceplatform.models.User;
 
 import java.util.List;
@@ -24,4 +25,11 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
 			+ " JOIN j.author u"
 			+ " WHERE u = :user ")
 	List<Feedback> getClientFeedbacks(@Param("user") User user);
+
+    @Query("SELECT f"
+			+ " FROM Feedback f "
+			+ " JOIN f.bid b "
+			+ " JOIN b.job j "
+			+ " WHERE j = :job ")
+	Feedback findByJob(@Param("job") Job job);
 }

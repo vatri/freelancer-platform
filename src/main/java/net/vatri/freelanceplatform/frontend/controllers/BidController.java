@@ -80,7 +80,7 @@ public class BidController extends AbstractController{
     	Set<Bid> contracts = new HashSet<Bid>( bidService.findByUser(me) );
     	
     	// List all bids for my jobs:
-    	List<Bid> bidsForMyJobs = bidService.findByMyJobs(me);
+    	List<Bid> bidsForMyJobs = bidService.findByUserJobs(me);
 
     	contracts.addAll(bidsForMyJobs); // join
     	    	

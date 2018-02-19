@@ -63,5 +63,5 @@ public class JobService {
 	public List<Job> findHiredJobsByAuthor(User user){
 		return jobRepository.findByAuthorAndHired(user);
 	}
-
+	
 }
