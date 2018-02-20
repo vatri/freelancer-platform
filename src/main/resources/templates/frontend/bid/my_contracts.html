@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:include="frontend/partials/head(title='My contracts')">
+<head th:include="frontend/partials/head(title=#{bid.my_contracts.title})">
 </head>
 <body>
     
@@ -13,17 +13,19 @@
                 <table class="table table-stripped">
 
                     <tr>
-                        <th>Job title</th>
-                        <th>Price</th>
+                        <th th:text="#{job}"></th>
+                        <th th:text="#{price}">Price</th>
                         <th> </th>
                     </tr>
 
                     <tr th:each="bid : ${contracts}">
                     <td th:utext="${bid.job.title}"></td>
                         <td th:utext="${#numbers.formatDecimal(bid.price, 0, 'POINT', 2, 'COMMA')}"></td>
-                         <td><a th:href="@{'/message/job_room/' + ${bid.job.id} + '/' + ${me.id == bid.user.id ? bid.job.author.id : bid.user.id} }" class="btn btn-primary">
-                         	Job room &gt;
-                       	</a></td>
+                         <td>
+                         	<a th:href="@{'/message/job_room/' + ${bid.job.id} + '/' + ${me.id == bid.user.id ? bid.job.author.id : bid.user.id} }" 
+                         		class="btn btn-primary"
+                         		th:text="#{job_room}"></a>
+                     	</td>
                     </tr>
 
                 </table>

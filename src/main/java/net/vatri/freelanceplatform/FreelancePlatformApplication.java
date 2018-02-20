@@ -63,7 +63,11 @@ public class FreelancePlatformApplication extends WebMvcConfigurerAdapter {
 	@Bean
 	public LocaleResolver localeResolver() {
 	    SessionLocaleResolver slr = new SessionLocaleResolver();
-	    slr.setDefaultLocale(Locale.ENGLISH);
+	    
+//	    Locale locale = Locale.ENGLISH;
+	    Locale locale = new Locale("rs", "Serbia");
+	    
+	    slr.setDefaultLocale(locale);
 	    return slr;
 	}
 	
