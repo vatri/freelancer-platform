@@ -27,6 +27,7 @@ redis.password =
 #spring.jpa.properties.*= # Additional native properties to set on the JPA provider.
 
 # Freelancer can see others' quotes
+freelancer.job.page_size = 5
 freelancer.see-other-quotes = false
 freelancer.freelancer-can-see-freelancers = true
 freelancer.client-can-see-jobs = true

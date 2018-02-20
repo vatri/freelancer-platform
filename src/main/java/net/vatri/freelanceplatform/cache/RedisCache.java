@@ -32,7 +32,7 @@ public class RedisCache implements Cache{
     }
 
     @Override
-    public Object getItem(String key, Class type) {
+    public Object getItem(String key, Class<?> type) {
         String jsonObject = jedis.get(key);
         try {
             return objectMapper.readValue(jsonObject, type);
@@ -60,7 +60,7 @@ public class RedisCache implements Cache{
     }
 
     @Override
-    public Collection<Object> getList(String key, Class type) {
+    public Collection<Object> getList(String key, Class<? extends Object> type) {
         return getListFromRedis(key, type);
     }
 
@@ -97,7 +97,7 @@ public class RedisCache implements Cache{
     }
 
 
-    private Collection<Object> getListFromRedis(String key, Class type){
+    private Collection<Object> getListFromRedis(String key, Class<? extends Object> type){
         Collection<Object> list = new ArrayList<>();
         jedis.smembers(key).forEach(jsonItem -> {
             try {

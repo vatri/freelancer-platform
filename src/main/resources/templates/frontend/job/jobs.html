@@ -7,8 +7,8 @@
     <div class="container main-container">
         <div class="row">
             <div class="col-md-12">
-                <h1 th:if="${isMyJobsPage} == false">Recent jobs</h1>
-                <h1 th:if="${isMyJobsPage} == true">My jobs</h1>
+                <h1 th:if="${is_my_jobs_page} == false">Recent jobs</h1>
+                <h1 th:if="${is_my_jobs_page} == true">My jobs</h1>
 
                 <table class="table table-stripped">
                     <tr>
@@ -17,7 +17,7 @@
                         <th> </th>
                     </tr>
 
-                    <tr th:each="job : ${jobs}">
+                    <tr th:each="job : ${jobs_page.content}">
                         <td th:text="'#' + ${job.id} +' '+ ${job.title}"></td>
                         <td>
                             <span class="job-list-description" th:utext="${job.description}"></span>
@@ -36,14 +36,13 @@
 
                 </table>
 
-                <!-- <ul class="pagination">
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                </ul> -->
-
+                <ul class="pagination">
+					<li th:each="i : ${#numbers.sequence( 1, jobs_page.totalPages)}">
+						<a th:href="${page_url + '&amp;page=' + i}"
+						   th:text="${i}"
+						   th:class="${i == jobs_page.number + 1 ? 'bold' : ''}">-999</a>
+					</li>
+                </ul>
             </div>
         </div>
     </div>

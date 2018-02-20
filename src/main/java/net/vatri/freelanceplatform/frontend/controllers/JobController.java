@@ -17,6 +17,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,25 +38,63 @@ public class JobController extends AbstractController{
     
     @Autowired
     FeedbackService feedbackService;
-
+    
+    @Value( "${freelancer.job.page_size}" )
+    private int jobPageSize;
+    
+//    @GetMapping
+//    public String listJobs(Model model, HttpServletRequest request){
+//    	
+//    	String filt = request.getParameter("filter");
+//    	User me = getCurrentUser();
+//    	boolean isMyJobsPage = false;
+//    	
+//    	if( filt != null && filt.equals("myjobs") && me != null) {
+//    		Map<String, Object> filter = new HashMap<>();
+//    		filter.put("user", me );
+//            model.addAttribute("jobs", jobService.list(filter));
+//            
+//            isMyJobsPage = true;
+//    	} else {
+//    		model.addAttribute("jobs", jobService.list());
+//    	}
+//    	
+//    	model.addAttribute("isMyJobsPage", isMyJobsPage);
+//    	
+//        return "frontend/job/jobs";
+//    }
+    
     @GetMapping
-    public String listJobs(Model model, HttpServletRequest request){
+    public String listJobs2(Model model, HttpServletRequest request){
+    	
+    	String pageUrl = "/job?a=a"; // Warning: In the HTML template we will append &page=[page] and we need to have ? in the query string
     	
     	String filt = request.getParameter("filter");
+    	String pPage = request.getParameter("page");
+    	
     	User me = getCurrentUser();
     	boolean isMyJobsPage = false;
     	
+    	Map<String, Object> filter = new HashMap<>();
+
     	if( filt != null && filt.equals("myjobs") && me != null) {
-    		Map<String, Object> filter = new HashMap<>();
+    		
     		filter.put("user", me );
-            model.addAttribute("jobs", jobService.list(filter));
-            
+    		pageUrl = "/job?filter=myjobs";
             isMyJobsPage = true;
-    	} else {
-    		model.addAttribute("jobs", jobService.list());
+    	
     	}
     	
-    	model.addAttribute("isMyJobsPage", isMyJobsPage);
+    	int pageNo = 1;
+    	if( pPage != null ) {
+    		pageNo = Integer.parseInt(pPage);
+    	}
+    	
+    	Page<Job> jobsPage = jobService.findAllPaged(filter, pageNo, jobPageSize);
+    	
+    	model.addAttribute("is_my_jobs_page", isMyJobsPage);
+    	model.addAttribute("jobs_page", jobsPage);
+    	model.addAttribute("page_url", pageUrl);
     	
         return "frontend/job/jobs";
     }

@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FreelancePlatformHelper {
-
+	
 	public static String getCurrentMySQLDate() {
 		return new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(new Date());
 	}

@@ -4,6 +4,9 @@ import net.vatri.freelanceplatform.models.Job;
 import net.vatri.freelanceplatform.models.User;
 import net.vatri.freelanceplatform.repositories.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -62,6 +65,19 @@ public class JobService {
 
 	public List<Job> findHiredJobsByAuthor(User user){
 		return jobRepository.findByAuthorAndHired(user);
+	}
+	
+	public Page<Job> findAllPaged(Map<String, Object> filter, Integer pageNumber, int pageSize) {
+        
+		PageRequest request = new PageRequest(pageNumber - 1, pageSize, Sort.Direction.DESC, "id");
+        
+        User user = (User) filter.get("user");
+        if(user != null) {
+        	return jobRepository.findByAuthor(user, request);
+        } else {
+        	return jobRepository.findAll(request);
+        }
+    
 	}
 	
 }
