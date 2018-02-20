@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +38,9 @@ public class MessageController extends AbstractController {
 	
 	@Autowired
 	BidService bidService;
+	
+	@Value("${freelancer.message_room.page_size}")
+    private int messageRoomPageSize;
 	
 	@GetMapping
 	public String myMessageRooms(Model model) {
@@ -76,9 +80,9 @@ public class MessageController extends AbstractController {
 			}
 			
 			messages = messageService.findByJobAndContractor(job, contractor);
-			messages.sort( (Message o1, Message o2) -> {
-				return o2.getId().compareTo(o1.getId());
-			});
+//			messages.sort( (Message o1, Message o2) -> {
+//				return o2.getId().compareTo(o1.getId());
+//			});
 		} else {
 			messages = messageService.findByMyConversers(me, contractor);
 		}
@@ -88,6 +92,8 @@ public class MessageController extends AbstractController {
 		model.addAttribute("contact_url", contactUrl);
 		model.addAttribute("bid", bid);
 		model.addAttribute("messages", messages);
+		model.addAttribute("message_room_page_size", messageRoomPageSize);
+		model.addAttribute("me", me);
 
 		return "frontend/message/job_room";
 	}

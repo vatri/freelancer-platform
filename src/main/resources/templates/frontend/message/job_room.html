@@ -18,10 +18,20 @@
 					Job:
 					<a th:text="${job.title}" th:href="@{'/job/view/' + ${job.id} }"></a>
 				</p>
+				
+				<p class="text-center">
+					<a class="btn btn-success" th:href="@{''}">Refresh</a>
+				</p>
+				
+				<p class="text-center">
+					(Displays last
+					<span th:text="${message_room_page_size}"></span>
+					messages.)
+				</p>
 
-				<div th:each="message : ${messages}" class="message-box">
+				<div th:each="message : ${messages}" th:class="${message.sender.id == me.id ? 'message-box-mine' : 'message-box'}">
 					<strong th:text="${message.sender.name}"></strong> 
-					(<span th:text="${#dates.format(message.created, 'MMM dd, yyyy')}"></span>)
+					(<span th:text="${#dates.format(message.created, 'HH:mm MMM dd, YYYY')}"></span>)
 					:
 					<span th:text="${message.text}" class="message-message-text"></span>
 				</div>

@@ -4,6 +4,8 @@ import net.vatri.freelanceplatform.models.Job;
 import net.vatri.freelanceplatform.models.Message;
 import net.vatri.freelanceplatform.models.User;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,12 +17,14 @@ import java.util.List;
 public interface MessageRepository extends JpaRepository<Message, Long> {
 	List<Message> findByJob(Job job);
 
-	@Query("SELECT m"
+	@Query(  "SELECT m"
 			+ " FROM Message m"
-			+ " WHERE m.job = :job AND ( m.sender = :contractor OR m.receiver = :contractor )")
-	List<Message> findByJobAndSenderOrReceiver(
+			+ " WHERE m.job = :job AND ( m.sender = :contractor OR m.receiver = :contractor )"
+			+ " ORDER BY m.id DESC")
+	Page<Message> findByJobAndSenderOrReceiver(
 		@Param("job") Job job,
-		@Param("contractor") User contractor
+		@Param("contractor") User contractor,
+		Pageable request
 	);
 
 	@Query("SELECT m"

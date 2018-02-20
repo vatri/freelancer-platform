@@ -6,6 +6,10 @@ import net.vatri.freelanceplatform.models.Job;
 import net.vatri.freelanceplatform.repositories.MessageRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,7 +22,10 @@ public class MessageService {
 
 	@Autowired
 	MessageRepository messageRepository;
-
+	
+	@Value("${freelancer.message_room.page_size}")
+    private int messageRoomPageSize;
+    
 	public Message save(Message message) {
 		return messageRepository.save(message);
 	}
@@ -28,7 +35,14 @@ public class MessageService {
 	}
     
     public List<Message> findByJobAndContractor(Job job, User contractor) {
-    	return messageRepository.findByJobAndSenderOrReceiver(job, contractor);
+    	
+    	int pageNumber = 1;
+    	
+		PageRequest request = new PageRequest(pageNumber - 1, messageRoomPageSize, Sort.Direction.DESC, "id");
+
+    	Page<Message> messages = messageRepository.findByJobAndSenderOrReceiver(job, contractor, request);
+    	return messages.getContent();
+    	
     }
 
 	public List<Message> getRoomsByUser(User me) {

@@ -28,6 +28,7 @@ redis.password =
 
 # Freelancer can see others' quotes
 freelancer.job.page_size = 5
+freelancer.message_room.page_size = 500
 freelancer.see-other-quotes = false
 freelancer.freelancer-can-see-freelancers = true
 freelancer.client-can-see-jobs = true

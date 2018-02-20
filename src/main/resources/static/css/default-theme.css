@@ -31,8 +31,17 @@
     padding: 10px;
 }
 
+
 .message-box{
-	padding: 10px;
-	background-color: #eee;
-	margin: 10px;
+	padding: 7px;
+	background-color: #d2ebf5;
+	margin: 5px;
+	border: 1px solid #ccc;
+}
+.message-box-mine{
+	padding: 7px;
+	background-color: none;
+	margin: 5px;
+	margin-left: 15px;
+    border: 1px solid #eee;
 }
