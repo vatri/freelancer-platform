@@ -23,9 +23,10 @@
                     (hidden)
                 </span>
                 /
-                <span th:text="#{expertize_level}">Expertize level</span>: <span th:text="${job.expertizeLevel}"></span>
+                <span th:text="#{expertize_level}">Expertize level</span>:
+                <span th:text="${job.expertizeLevel}"></span>
             </p>
-            <div class="job-details-description" th:text="${job.description}"></div>
+            <div class="job-details-description" th:utext="${job.description}"></div>
 
             <hr />
 

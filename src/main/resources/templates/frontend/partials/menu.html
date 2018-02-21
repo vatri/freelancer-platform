@@ -41,6 +41,9 @@
                 <li sec:authorize="isAuthenticated()">
                     <a th:href="@{/logout}" th:text="#{menu.logout}">Log out</a>
                 </li>
+                
+                <li><a href="?locale=eng_US">eng</a></li>
+                <li><a href="?locale=rs_SR">срб</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

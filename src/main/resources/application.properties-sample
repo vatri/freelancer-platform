@@ -32,3 +32,4 @@ freelancer.message_room.page_size = 500
 freelancer.see-other-quotes = false
 freelancer.freelancer-can-see-freelancers = true
 freelancer.client-can-see-jobs = true
+freelancer.locale.default = rs_SR
