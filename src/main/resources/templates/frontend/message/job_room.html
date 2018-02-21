@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml"
 	xmlns:sec="http://www.w3.org/1999/xhtml">
-<head th:include="frontend/partials/head(title='Messaging')">
+<head th:include="frontend/partials/head(title=#{message.job_room.page_title})">
 </head>
 <!--<div th:include="frontend/partials/head"></div>-->
 <body>
@@ -10,20 +10,20 @@
 		<div class="row">
 			<div class="col-md-8">
 
-				<h1>Messages</h1>
+				<h1 th:text="#{message.job_room.page_title}">Messages</h1>
 
 				<h3><a th:text="${contact.name}" th:href="${contact_url}"></a></h3>
 
 				<p th:if="${job != null}">
-					Job:
+					<span th:text="#{job}">Job</span>:
 					<a th:text="${job.title}" th:href="@{'/job/view/' + ${job.id} }"></a>
 				</p>
 				
 				<p class="text-center">
-					<a class="btn btn-success" th:href="@{''}">Refresh</a>
+					<a class="btn btn-success" th:href="@{''}" th:text="#{message.job_room.refresh}">Refresh</a>
 				</p>
 				
-				<p class="text-center">
+				<p class="text-center" th:text="#{message.job_room.last_n_messages_warning( ${message_room_page_size} )}">
 					(Displays last
 					<span th:text="${message_room_page_size}"></span>
 					messages.)
@@ -39,10 +39,10 @@
 				<div class="message-new-message-container">
 					<form th:action="@{''}" method="post">
 						<p>
-							<textarea class="form-control" name="message" placeholder="Enter your message..."></textarea>
+							<textarea class="form-control" name="message" th:placeholder="#{message.job_room.message_placeholder}" __placeholder="Enter your message..."></textarea>
 						</p>
 						<p>
-							<button class="btn btn-primary btn-lg">Send</button>
+							<button class="btn btn-primary btn-lg" th:text="#{send}">Send</button>
 						</p>
 					</form>
 
@@ -51,25 +51,28 @@
 			</div>
 			<div class="col-md-4">
 				<div th:if="${job != null}">
-					<h3 th:if="${bid.accepted != 0}">Contract details</h3>
-					<h3 th:if="${bid.accepted == 0}">Proposal</h3>
+					<h3 th:if="${bid.accepted != 0}" th:text="#{message.job_room.contract_details_title}">Contract details</h3>
+					<h3 th:if="${bid.accepted == 0}" th:text="#{proposal}">Proposal</h3>
 					<p th:if="${bid.accepted != 0 and bid.closed == 0}">
-						<span class="label label-primary">Accepted</span>
+						<span class="label label-primary" th:text="#{bid.status.accepted}">Accepted</span>
 					</p>
 					<p th:if="${bid.closed == 1}">
-						<span class="label label-success">Closed</span>
+						<span class="label label-success" th:text="#{bid.status.closed}">Closed</span>
 					</p>
 					<p>
-						<b>Price:</b> <span th:text="${#numbers.formatDecimal(bid.price, 0, 'POINT', 2, 'COMMA')}"></span>
-						(<span th:text="${job.type}"></span>)
+						<b th:text="#{price}">Price</b>: <span th:text="${#numbers.formatDecimal(bid.price, 0, 'POINT', 2, 'COMMA')}"></span>
+						(
+						<span th:if="${job.type == 'fixed'}" th:text="#{option.fixed}"></span>
+						<span th:if="${job.type == 'hourly'}" th:text="#{option.hourly}"></span>
+						)
 						<br />
-						<b>Deadline:</b> <span th:text="${bid.deadline}"></span>
+						<b th:text="#{deadline}">Deadline</b>: <span th:text="${bid.deadline ?: 'x'}"></span>
 					</p>
 					<p th:if="${bid.closed == 0}">
 						<a th:href="@{'/bid/close/' + ${bid.id} }" class="btn btn-success">Close contract</a>
 					</p>
 					<p th:if="${bid.closed == 1}">
-						<a th:href="@{'/feedback/view/' + ${bid.id} }" class="btn btn-primary">View feedback</a>
+						<a th:href="@{'/feedback/view/' + ${bid.id} }" class="btn btn-primary" th:text="#{view_feedback}">View feedback</a>
 					</p>
 				</div>
 				<!-- <h3>Other rooms</h3>

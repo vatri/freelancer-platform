@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml"
 	xmlns:sec="http://www.w3.org/1999/xhtml">
-<head th:include="frontend/partials/head(title='My messages')">
+<head th:include="frontend/partials/head(title=#{message.message_rooms.page_title})">
 </head>
 <!--<div th:include="frontend/partials/head"></div>-->
 <body>
@@ -10,13 +10,13 @@
 		<div class="row">
 			<div class="col-md-8">
 
-				<h1>My message rooms</h1>
+				<h1 th:text="#{message.message_rooms.page_title}">My message rooms</h1>
 
 				<table class="table table-stripped">
                     <tr>
-                        <th>User</th>
-                        <th>Last message</th>
-                        <th>Job</th>
+                        <th th:text="#{user}">User</th>
+                        <th th:text="#{message.message_rooms.last_message}">Last message</th>
+                        <th th:text="#{job}">Job</th>
                         <th> </th>
                     </tr>
 
@@ -39,7 +39,7 @@
  	                        	<a th:href="@{'/message/job_room/' + ${message.job != null ? message.job.id : 0} + '/' + ${message.sender.id == my_id ? message.receiver.id : message.sender.id}}"
 	                        	   class="btn btn-primary">
 	                        	   		<i class="glyphicon glyphicon-envelope"> </i>
-	                       				Open
+	                       				<span th:text="#{open}">Open</span>
 	                        	</a>
                         </td>
                     </tr>

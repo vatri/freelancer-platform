@@ -13,33 +13,33 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="/job">Find a job</a></li>
+                <li class="active"><a href="/" th:text="#{menu.home}"></a></li>
+                <li><a href="/job" th:text="#{menu.find_job}"></a></li>
             </ul>
             <ul class="nav nav-pills pull-right">
-                <li sec:authorize="! isAuthenticated()" role="presentation"><a th:href="@{/login}">Login</a></li>
-                <li sec:authorize="! isAuthenticated()" role="presentation"><a th:href="@{/register}">Register</a></li>
+                <li sec:authorize="! isAuthenticated()" role="presentation"><a th:href="@{/login}" th:text="#{menu.login}"></a></li>
+                <li sec:authorize="! isAuthenticated()" role="presentation"><a th:href="@{/register}" th:text="#{menu.register}"></a></li>
                 <li sec:authorize="isAuthenticated()">
                     <a th:href="@{/profile}" sec:authentication="principal.fullName"></a>
                 </li>
                 <li sec:authorize="isAuthenticated()">
-                    <a th:href="@{/job/create}">Post a job</a>
+                    <a th:href="@{/job/create}" th:text="#{menu.post_job}"></a>
                 </li>
                 <li sec:authorize="isAuthenticated()">
-                    <a th:href="@{/profile} + '#bids'">My bids</a>
+                    <a th:href="@{/profile} + '#bids'" th:text="#{menu.my_bids}"></a>
                 </li>
                 <li sec:authorize="isAuthenticated()">
-                    <a th:href="@{/bid/my-contracts}">My contracts</a>
+                    <a th:href="@{/bid/my-contracts}" th:text="#{menu.my_contracts}"></a>
                 </li>
                 <li sec:authorize="isAuthenticated()">
-                    <a th:href="@{/job?filter=myjobs}">My jobs</a>
+                    <a th:href="@{/job?filter=myjobs}" th:text="#{menu.my_jobs}">My jobs</a>
                 </li>
                 <li sec:authorize="isAuthenticated()">
-                    <a th:href="@{/message}">Messages</a>
+                    <a th:href="@{/message}" th:text="#{menu.messages}">Messages</a>
                 </li>
                 
                 <li sec:authorize="isAuthenticated()">
-                    <a th:href="@{/logout}">Log out</a>
+                    <a th:href="@{/logout}" th:text="#{menu.logout}">Log out</a>
                 </li>
             </ul>
         </div><!--/.nav-collapse -->

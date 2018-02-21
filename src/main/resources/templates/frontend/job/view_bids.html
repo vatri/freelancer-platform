@@ -9,20 +9,20 @@
     <div class="row">
         <div class="col-md-12">
             
-            <h1>View bids</h1>
+            <h1 th:text="#{job.view.view_bids}">View bids</h1>
             
             <h2 th:text="${job.title}"></h2>
             
             <p>
-            	<a th:href="@{'/job/view/' + ${job.id}}" class="btn btn-sm btn-primary">View job</a>
+            	<a th:href="@{'/job/view/' + ${job.id}}" class="btn btn-sm btn-primary" th:text="#{job.view.bids.view_job}">View job</a>
             </p>
             
             <table class="table table-striped">
                     <tr>
-                        <th>User / Rating</th>
-                        <th>Price</th>
-                        <th>Deadline</th>
-                        <th>Proposal</th>
+                        <th th:text="#{job.view.bids.table.user}">User</th>
+                        <th th:text="#{price}">Price</th>
+                        <th  th:text="#{deadline}">Deadline</th>
+                        <th  th:text="#{job.view.bids.table.proposal}">Proposal</th>
                         <th> </th>
                     </tr>
 
@@ -34,15 +34,15 @@
                         <td>
                         	<a class="btn btn-success" th:href="@{'/message/job_room/' + ${bid.job.id} + '/' + ${bid.user.id} }">
                         		<i class="glyphicon glyphicon-envelope"> </i>
-                        		Message
+                        		<span th:text="#{job.view.bids.table.message}">Message</span>
                         	</a>
                         	<a onclick="if( ! confirm('Are you sure?')){ return false; }" th:if="${bid.accepted} == 0" class="btn btn-primary" th:href="@{ '/bid/accept/' + ${bid.id} }">
                         		<i class="glyphicon glyphicon-ok"> </i>
-                        		Hire
+                        		<span th:text="#{job.view.bids.table.hire}" >Hire</span>
                         	</a>
                         	<span th:if="${bid.accepted} == 1" class="green text-success">
                         		<i class="glyphicon glyphicon-ok"> </i>
-                        		Accepted
+                        		<span th:text="#{job.view.bids.table.accepted}" >Accepted</span>
                         	</span>
                        	</td>
                     </tr>

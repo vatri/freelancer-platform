@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="frontend/partials/head(title='Register')"></head>
+<head th:include="frontend/partials/head(title=#{register.page_title})"></head>
 <body>
 
 
@@ -8,7 +8,7 @@
 <div class="container main-container">
     <div class="row">
         <div class="col-md-8">
-            <h1>Register</h1>
+            <h1 th:text="#{register.page_title}"></h1>
             <p th:if="${error}" class="error"><div class="alert alert-danger" th:utext="${error}"></div></p>
 
             <form th:action="@{/register}" method="post">

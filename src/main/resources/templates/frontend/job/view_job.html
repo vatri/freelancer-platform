@@ -23,7 +23,7 @@
                     (hidden)
                 </span>
                 /
-                Expertize level: <span th:text="${job.expertizeLevel}"></span>
+                <span th:text="#{expertize_level}">Expertize level</span>: <span th:text="${job.expertizeLevel}"></span>
             </p>
             <div class="job-details-description" th:text="${job.description}"></div>
 
@@ -32,11 +32,11 @@
             <div sec:authorize="isAuthenticated()">
 
                 <div class="myBid" th:if="${myBid != null}">
-                    <h2>My bid</h2>
+                    <h2 th:text="#{job.view.my_bid}">My bid</h2>
                     <p>
                         <i class="glyphicon glyphicon-time"></i>  <span th:text="${myBid.created}"></span><br />
                         <i class="glyphicon glyphicon-usd"></i>  <span th:text="${#numbers.formatDecimal(myBid.price, 0, 'POINT', 2, 'COMMA')}"></span><br />
-                        Deadline: <span th:text="${myBid.deadline}"></span><br />
+                        <span th:text="#{job.view.deadline}">Deadline</span>: <span th:text="${myBid.deadline}"></span><br />
                     </p>
                     <div th:utext="${myBid.proposal}" class="job-details-description"></div>
                 </div>
@@ -44,12 +44,12 @@
 
                 <div  th:if="${myBid == null}">
                     <p th:if="${job.author.id != me.id}">
-                    	<a href="javascript: $('#bid-form').slideDown();" class="btn btn-success">
+                    	<a href="javascript: $('#bid-form').slideDown();" class="btn btn-success" th:text="#{job.view.bid}">
                     		Bid
                     	</a>
                     </p>
                     <p th:if="${job.author.id == me.id}">
-                    	<a th:href="@{'/job/bids/' + ${job.id}}" class="btn btn-success">
+                    	<a th:href="@{'/job/bids/' + ${job.id}}" class="btn btn-success" th:text="#{job.view.view_bids}">
                     		View bids
                     	</a>
                     </p>
@@ -58,19 +58,19 @@
                         <input type="hidden" name="job_id" th:value="${job.id}" />
 
                         <div class="form-group">
-                            <label for="price">Price</label>
+                            <label for="price" th:text="#{price}">Price</label>
                             <input type="number" id="price" name="price" required="required" class="form-control" />
                         </div>
                         <div class="form-group">
-                            <label for="deadline">Deadline / durration (optional)</label>
+                            <label for="deadline" th:text="#{job.view.bid_form.deadline}">Deadline / durration (optional)</label>
                             <input type="text" id="deadline" name="deadline" class="form-control" />
                         </div>
                         <div class="form-group">
-                            <label for="proposal">Proposal</label>
+                            <label for="proposal" th:text="#{job.view.bid_form.proposal}">Proposal</label>
                             <textarea id="proposal" name="proposal" class="form-control" required="required" rows="15"></textarea>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-success btn-lg">
+                            <button class="btn btn-success btn-lg"  th:text="#{send}">
                                 Place a bid
                             </button>
                         </div>
@@ -102,18 +102,18 @@
                     <i th:if="${average_client_feedback_rate &gt; 3}" class="glyphicon glyphicon-star"></i>
                     <i th:if="${average_client_feedback_rate &gt; 4}" class="glyphicon glyphicon-star"></i>
                     <span th:text="${average_client_feedback_rate}"></span> / 5 
-                    (<span th:text="${reviews_no}"></span> reviews)
+                    (<span th:text="#{reviews_no}">reviews</span>: <span th:text="${reviews_no}"></span> )
                     <br />
-                    Hire rate: <span th:text="${hire_rate}"></span>% 
+                    <span th:text="#{hire_rate}">Hire rate</span>: <span th:text="${hire_rate}"></span>% 
                     ( <span th:text="${hired_jobs_no}"></span> / <span th:text="${jobs_no}"></span> )
                     <hr />
-                    <h3>Job stats</h3>
-                    Bids: <span th:text="${bids_no}"></span><br />
+                    <h3 th:text="#{job_stats}">Job stats</h3>
+                    <span th:text="#{bids}">Bids</span>: <span th:text="${bids_no}"></span><br />
                     <!-- Inverviewing: 4 (?) -->
                     <hr />
                 </p>
             </div>
-            <div sec:authorize=" !isAuthenticated()">
+            <div sec:authorize=" !isAuthenticated()" th:utext="#{job.view.please_login_text}">
                 Login to see client details
             </div>
 

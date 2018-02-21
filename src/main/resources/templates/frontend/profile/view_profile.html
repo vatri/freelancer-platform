@@ -10,34 +10,31 @@
         <div class="col-md-8">
             <h1 th:text="${user.name}"></h1>
             <div th:if="${canEdit}" class="text-right">
-                <a th:href="@{/profile/edit}" class="btn btn-primary">Edit profile</a>
+                <a th:href="@{/profile/edit}" class="btn btn-primary" th:text="#{profile.edit.title}">Edit profile</a>
             </div>
 
             <div th:if="${profile != null}">
-                <p>
-                    <div th:if="${ !profile.location.isEmpty() }">
-	                    <i class="glyphicon glyphicon-map-marker"> </i>
-	                    <span th:text="${profile.location}"></span>
-                    </div>
-                    <div th:if="${ !profile.linkedin.isEmpty() }">
-	                	Linkedin: <a th:href="${profile.linkedin}" th:text="${profile.linkedin}"></a>
-                   	</div>
-                </p>
-                <div class="job-details-description" th:utext="${profile.biography}"></div>
+				<p th:if="${ !profile.location.isEmpty() }">
+					<i class="glyphicon glyphicon-map-marker"> </i>
+					<span th:text="${profile.location}"></span>
+				</p>
+				<p th:if="${ !profile.linkedin.isEmpty() }">
+					Linkedin: <a th:href="${profile.linkedin}" th:text="${profile.linkedin}"></a>
+				</p>
+				<p class="job-details-description" th:utext="${profile.biography}"></p>
             </div>
 
-            <div th:if="${profile == null}">
+            <p th:if="${profile == null}" th:text="#{profile.view_client.no_profile_msg}">
                 This user hasn't created profile yet.
-            </div>
+            </p>
         </div>
     </div>
     
     <div class="row" th:if="${canEdit}" id="bids">
         <div class="col-md-8">
-            <h1>My Bids</h1>
+            <h1 th:text="#{menu.my_bids}">My Bids</h1>
             
             <p th:each="bid : ${myBids}">
-                
                 <a th:href="@{'/job/' + ${bid.job.id}}" th:text="${bid.job.title}"></a>
             </p>
         </div>
@@ -46,7 +43,7 @@
     <div class="row">
         <div class="col-md-8">
             
-            <h1>Job history</h1>
+            <h1 th:text="#{job_history}">Job history</h1>
             
             <div th:each="jh : ${job_history}">
                 

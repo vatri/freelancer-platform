@@ -7,13 +7,13 @@
     <div class="container main-container">
         <div class="row">
             <div class="col-md-12">
-                <h1 th:if="${is_my_jobs_page} == false">Recent jobs</h1>
-                <h1 th:if="${is_my_jobs_page} == true">My jobs</h1>
+                <h1 th:if="${is_my_jobs_page} == false" th:text="#{job.list.title_recent}">Recent jobs</h1>
+                <h1 th:if="${is_my_jobs_page} == true" th:text="#{menu.my_jobs}">My jobs</h1>
 
                 <table class="table table-stripped">
                     <tr>
-                        <th>Job title</th>
-                        <th>Description</th>
+                        <th th:text="#{job}">Job title</th>
+                        <th th:text="#{description}">Description</th>
                         <th> </th>
                     </tr>
 
@@ -31,7 +31,7 @@
                                 <span th:text="${job.expertizeLevel}"></span>
                             </p>
                         </td>
-                        <td><a th:href="@{'/job/view/' + ${job.id}}" class="btn btn-primary">View</a></td>
+                        <td><a th:href="@{'/job/view/' + ${job.id}}" class="btn btn-primary" th:text="#{job.list.view}">View</a></td>
                     </tr>
 
                 </table>
