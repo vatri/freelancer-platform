@@ -11,6 +11,7 @@ Open Source platform for freelance portals based on Java Spring technology.
 
 ## Features
 
+- Internalization (i18n: Serbian and English by default)
 - User module (register, login, forgot password)
 - Post a job
 - Place a bid
