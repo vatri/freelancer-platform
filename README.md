@@ -35,7 +35,9 @@ Open Source platform for freelance portals based on Java Spring technology.
 ### 2. Set your config
 
 1. Copy /src/main/resources/application.properties-sample to /src/main/resources/application.properties
-3. Update values to your needs
+2. Edit spring.datasource.* values to fit your DB server
+3. Edit freelancer.locale.default = rs_SR and change to "en_US" if you want English by default
+4. Edit freelancer.job.page_size = 5 to change how many jobs are displayed per page.
 
 ### 3. Clone GIT repo
 
