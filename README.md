@@ -60,3 +60,8 @@ Open Source platform for freelance portals based on Java Spring technology.
 Note: you can also run project from Eclipse:
 
 open project > right click on FreelancePlatformApplication.java > Run As > Java Application
+
+## How to translate to your language
+
+1. Create properties file with name "messages_[locale].properties", for example messages_ru_RU.properties in folder /src/main/resources/
+2. Add appropriate link to top menu (?locale=ru_RU)
