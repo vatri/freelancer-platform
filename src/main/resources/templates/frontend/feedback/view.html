@@ -10,14 +10,14 @@
         	<h1 th:text="#{view_feedback}"></h1>
         	
         	<h3 th:text="${bid.job.title}"></h3>
-        	<p><span th:text="#{contractor}" class="bold"></span> <span th:text="${bid.user.name}"></span></p>
-    	    <p><span th:text="#{rate}" class="bold"></span> <span th:text="${feedback.contractorRate}"></span> / 5</p>
+        	<p><span th:text="#{contractor}" class="bold"></span>: <span th:text="${bid.user.name}"></span></p>
+    	    <p><span th:text="#{rate}" class="bold"></span>: <span th:text="${feedback.contractorRate}"></span> / 5</p>
     	    <p>
-	    	    <span th:text="#{send}" class="bold"></span><br />
+	    	    <span th:text="#{feedback_text}" class="bold"></span>:<br />
 	    	    <span th:text="${feedback.contractorFeedback}"></span>
     	    </p>
 
-        	<p><span th:text="#{client}" class="bold"></span> <span th:text="${bid.job.author.name}"></span></p>
+        	<p><span th:text="#{client}" class="bold"></span>: <span th:text="${bid.job.author.name}"></span></p>
     	    <p><span th:text="#{rating}" class="bold"></span>: <span th:text="${feedback.clientRate}"></span> / 5 </p>
     	    <p>
 	    	    <span th:text="#{feedback_text}" class="bold"></span>:<br />
