@@ -1,4 +1,4 @@
-package net.vatri.freelanceplatform.frontend.controllers;
+package net.vatri.freelanceplatform.controllers;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package net.vatri.freelanceplatform.frontend.controllers;
+package net.vatri.freelanceplatform.controllers;
 
 
 import net.vatri.freelanceplatform.models.User;
