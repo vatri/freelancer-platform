@@ -56,14 +56,14 @@ Open Source platform for freelance portals based on Java Spring technology.
 3. mvn compile
 4. mvn spring-boot:run
 
+Note: you can also run project from Eclipse:
+
+open project > right click on FreelancePlatformApplication.java > Run As > Java Application
+
 ### 5. Test
 
 1. Open URL in your browser http://localhost:8000
 2. (optional) Login with triva89@yahoo.com / 123456 (client) and aabb@mail.com/123456 (freelancer)
-
-Note: you can also run project from Eclipse:
-
-open project > right click on FreelancePlatformApplication.java > Run As > Java Application
 
 ## How to translate to your language
 
