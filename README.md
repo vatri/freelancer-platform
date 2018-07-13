@@ -4,11 +4,14 @@ Open Source platform for freelance portals based on Java Spring technology.
 
 ## Technology
 
-- Java Spring Boot
+- Java
+- Spring Boot
+- MySQL
+- Hibernate ORM
 - Maven
 - Thymeleaf 
 - Bootstrap framework
-- MySQL
+
 
 ## Features
 
