@@ -36,5 +36,9 @@ public class FeedbackService {
 	public Feedback findByJob(Job job) {
 		return feedbackRepository.findByJob(job);
 	}
+	
+	public List<Feedback> findByBids(List<Bid> bids){
+		return feedbackRepository.findByBid(bids);
+	}
 
 }

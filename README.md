@@ -6,7 +6,8 @@ Open Source platform for freelance portals based on Java Spring technology.
 
 - Java Spring Boot
 - Maven
-- Thymeleaf
+- Thymeleaf 
+- Bootstrap framework
 - MySQL
 
 ## Features
@@ -28,22 +29,22 @@ Open Source platform for freelance portals based on Java Spring technology.
 
 ## How to install and run 
 
-### 1. Prepare MySQL
+### 1. Clone GIT repo
+
+1. open CMD or Linux terminal and CD to (eclipse) projects root folder
+2. git clone [THIS REPO]
+
+### 2. Prepare MySQL
 
 1. Create MySQL database 
 2. Import /freelance.sql
 
-### 2. Set your config
+### 3. Set your config
 
 1. Copy /src/main/resources/application.properties-sample to /src/main/resources/application.properties
 2. Edit spring.datasource.* values to fit your DB server
 3. Edit freelancer.locale.default = rs_SR and change to "en_US" if you want English by default
 4. Edit freelancer.job.page_size = 5 to change how many jobs are displayed per page.
-
-### 3. Clone GIT repo
-
-1. open CMD or Linux terminal and CD to (eclipse) projects root folder
-2. git clone [THIS REPO]
 
 ### 4. Run Java app
 
@@ -55,7 +56,7 @@ Open Source platform for freelance portals based on Java Spring technology.
 ### 5. Test
 
 1. Open URL in your browser http://localhost:8000
-2. (optional) Login with triva89@yahoo.com / 123456 credentials - it has some entries for test
+2. (optional) Login with triva89@yahoo.com / 123456 (client) and aabb@mail.com/123456 (freelancer)
 
 Note: you can also run project from Eclipse:
 

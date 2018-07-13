@@ -32,4 +32,7 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
 			+ " JOIN b.job j "
 			+ " WHERE j = :job ")
 	Feedback findByJob(@Param("job") Job job);
+
+	List<Feedback> findByBid(List<Bid> bids);
+	
 }

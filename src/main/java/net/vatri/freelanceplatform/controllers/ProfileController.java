@@ -73,31 +73,15 @@ public class ProfileController extends AbstractController {
         }
         
         List<Bid> closedBids = bidService.findByClosedAndUser(1, user);
-        
-        List<JobHistory> jobHistory = new ArrayList<>();
-        
-        for(Bid b : closedBids) {
-        	
-        	JobHistory jh = new JobHistory();
-        	Feedback feedback = feedbackService.findByBid(b);
+       
+        List<Feedback> myFeedbacks = feedbackService.findByBids(closedBids);
 
-        	
-        	if(feedback != null) {
-        		
-            	jh.setBid(b);
-            	jh.setFeedback(feedback);
-            	        		
-        		jobHistory.add(jh);
-        	}
-        	
-        }
         
-
         model.addAttribute("user", user);
         model.addAttribute("profile", user.getProfile());
         model.addAttribute("canEdit", canEdit);
         model.addAttribute("myBids", myBids);
-        model.addAttribute("job_history", jobHistory);
+        model.addAttribute("my_feedbacks", myFeedbacks);
 
         return "frontend/profile/view_profile";
     }

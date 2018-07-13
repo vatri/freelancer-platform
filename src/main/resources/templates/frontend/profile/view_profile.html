@@ -45,18 +45,18 @@
             
             <h1 th:text="#{job_history}">Job history</h1>
             
-            <div th:each="jh : ${job_history}">
+            <div th:each="feedback : ${my_feedbacks}">
                 
                 <p>
-	                <a th:href="@{'/job/' + ${jh.bid.job.id}}" th:text="${jh.bid.job.title}"></a>
+	                <a th:href="@{'/job/' + ${feedback.bid.job.id}}" th:text="${feedback.bid.job.title}"></a>
                 </p>
                 <i class="glyphicon glyphicon-star"></i>
-                <i th:if="${jh.feedback.contractorRate &gt; 1}" class="glyphicon glyphicon-star"></i>
-                <i th:if="${jh.feedback.contractorRate &gt; 2}" class="glyphicon glyphicon-star"></i>
-                <i th:if="${jh.feedback.contractorRate &gt; 3}" class="glyphicon glyphicon-star"></i>
-                <i th:if="${jh.feedback.contractorRate &gt; 4}" class="glyphicon glyphicon-star"></i>
+                <i th:if="${feedback.contractorRate &gt; 1}" class="glyphicon glyphicon-star"></i>
+                <i th:if="${feedback.contractorRate &gt; 2}" class="glyphicon glyphicon-star"></i>
+                <i th:if="${feedback.contractorRate &gt; 3}" class="glyphicon glyphicon-star"></i>
+                <i th:if="${feedback.contractorRate &gt; 4}" class="glyphicon glyphicon-star"></i>
                 <p>
-	                <span th:text="${jh.feedback.contractorFeedback}"></span>
+	                <span th:text="${feedback.contractorFeedback}"></span>
                 </p>
                 <hr />
             </div>
