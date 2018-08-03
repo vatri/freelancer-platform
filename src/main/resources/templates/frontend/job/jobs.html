@@ -37,7 +37,7 @@
                 </table>
 
                 <ul class="pagination">
-					<li th:each="i : ${#numbers.sequence( 1, jobs_page.totalPages)}">
+					<li th:each="i : ${#numbers.sequence( jobs_page.totalPages,1 )}">
 						<a th:href="${page_url + '&amp;page=' + i}"
 						   th:text="${i}"
 						   th:class="${i == jobs_page.number + 1 ? 'bold' : ''}">-999</a>
